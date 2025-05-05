@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITCPR Server</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ITCPR Computing Server</h1>
+        <p class="subtitle">Institute for Theoretical and Computational Physics Research</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Server Specifications</h2>
+            <div class="specs-grid">
+                <div><strong>CPU:</strong> AMD RYZEN 7 7800X3D Processor</div>
+                <div><strong>GPU:</strong> NVIDIA GeForce RTX 4070 12GB GDDR6X - Titanium</div>
+                <div><strong>RAM:</strong> 64GB DDR4</div>
+                <div><strong>Storage:</strong> Samsung 980 Pro 2 TB PCIe 4.0 NVME SSD</div>
+                <div><strong>Operating System:</strong> Windows 11 & Linux</div>
+            </div>
+        </section>
+        
+        <section class="card">
+            <h2>Server Status</h2>
+            <div class="status-grid">
+                <div class="status-item">
+                    <span class="label">Last Updated</span>
+                    <span id="lastUpdated">Loading...</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Memory Usage</span>
+                    <span id="memory"></span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Storage Usage</span>
+                    <span id="disk"></span>
+                </div>
+                <div class="status-item">
+                    <span class="label">CPU Temperature</span>
+                    <span id="temp"></span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Uptime</span>
+                    <span id="uptime"></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>About This Server</h2>
+            <p>
+                This private server is maintained by ITCPR to support theoretical and computational physics research,
+                data storage, code development, and remote access for authorized researchers, staff, and collaborators.
+            </p>
+        </section>
+
+        <section class="card">
+            <h2>Access Policy</h2>
+            <div class="policy-block">
+                <p>Access is strictly limited to authorized personnel. Unauthorized use or access attempts will be logged and reported.</p>
+                <ul>
+                    <li>Personal credentials only — sharing prohibited.</li>
+                    <li>Multi-factor authentication required where applicable.</li>
+                    <li>SSH keys must be registered with the system administrator.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Acceptable Use Policy</h2>
+            <div class="policy-block">
+                <p>All users agree to the following conditions:</p>
+                <ul>
+                    <li>Use resources solely for research and educational purposes.</li>
+                    <li>No unauthorized data access, sharing, or illegal activity.</li>
+                    <li>Software installations require prior approval.</li>
+                    <li>Maintain server stability and respect resource limits.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Data & Security Policy</h2>
+            <div class="policy-block">
+                <ul>
+                    <li>All activities are monitored and logged.</li>
+                    <li>Confidential data must be encrypted during transmission and at rest.</li>
+                    <li>Security incidents must be reported immediately.</li>
+                    <li>Inactive accounts are reviewed regularly.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card contact">
+            <h2>Contact</h2>
+            <p>For access requests, support, or reporting issues:</p>
+            <a href="mailto:info@itcpr.org" class="email">info@itcpr.org</a>
+        </section>
+    </main>
+
+    <footer>
+        &copy; <span id="year"></span> ITCPR. All Rights Reserved.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
