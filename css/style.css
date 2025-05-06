@@ -161,6 +161,32 @@ footer {
     text-align: center;
 }
 
+/* Login Button */
+#authControls {
+    margin-top: 1rem;
+}
+
+#loginButton, #logoutButton {
+    background-color: #00c4cc;
+    color: #111;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#loginButton:hover, #logoutButton:hover {
+    background-color: #008b8f;
+}
+
+#userInfo {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #aaa;
+}
+
 /* Responsive */
 @media (max-width: 700px) {
     h1 {
