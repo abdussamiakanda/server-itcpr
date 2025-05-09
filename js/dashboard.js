@@ -24,7 +24,7 @@ async function showDashboard() {
             Dashboard
         </div>
         <div onclick="goToPage('statistics')">
-            <span class="material-icons">analytics</span>
+            <span class="material-icons">bar_chart</span>
             Statistics
         </div>
         <div onclick="goToPage('monitor')">
