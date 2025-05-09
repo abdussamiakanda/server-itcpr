@@ -75,20 +75,29 @@ window.goToPage = async function(page) {
 async function getServerWSLCommands() {
     try {
         const logText = await fetchWSLCommands();
-        const logData = parseLogData(logText).slice(0, 100);
+        let logData = parseLogData(logText);
+
+        if (userData.type !== 'admin') {
+            const userIps = userData.ip ? userData.ip.split(";").map(ip => ip.trim()) : [];
+            logData = logData.filter(log => userIps.includes(log.ip));
+        }
+
+        logData = logData.slice(0, 100);
 
         const users = [...new Set(parseLogData(logText).map(log => log.ip))];
         const commands = [...new Set(parseLogData(logText).map(log => log.commandId))];
 
         const filtersHTML = `
             <div class="wsl-filters">
-                <div class="filter-group">
-                    <label for="userFilter">Filter by User:</label>
-                    <select id="userFilter" onchange="refreshTable()">
-                        <option value="">All Users</option>
-                        ${users.map(user => `<option value="${user}">${wslServerUsers[user]}</option>`).join('')}
-                    </select>
-                </div>
+                ${userData.type === 'admin' ? `
+                    <div class="filter-group">
+                        <label for="userFilter">Filter by User:</label>
+                        <select id="userFilter" onchange="refreshTable()">
+                            <option value="">All Users</option>
+                            ${users.map(user => `<option value="${user}">${wslServerUsers[user]}</option>`).join('')}
+                        </select>
+                    </div>
+                ` : ''}
                 <div class="filter-group">
                     <label for="commandFilter">Filter by Command ID:</label>
                     <select id="commandFilter" onchange="refreshTable()">
@@ -172,16 +181,21 @@ function convertWSLCommandTime(timestamp) {
 }
 
 window.refreshTable = async function() {
-    const userFilter = document.getElementById('userFilter').value;
+    const userFilter = document.getElementById('userFilter')?.value;
     const commandFilter = document.getElementById('commandFilter').value;
     const dateFilter = document.getElementById('dateFilter').value;
 
     const logText = await fetchWSLCommands();
-    const logData = parseLogData(logText);
+    let logData = parseLogData(logText);
+
+    if (userData.type !== 'admin') {
+        const userIps = userData.ip ? userData.ip.split(";").map(ip => ip.trim()) : [];
+        logData = logData.filter(log => userIps.includes(log.ip));
+    }
 
     let filteredData = logData;
 
-    if (userFilter) {
+    if (userFilter && userData.type === 'admin') {
         filteredData = filteredData.filter(log => log.ip === userFilter);
     }
     if (commandFilter) {
