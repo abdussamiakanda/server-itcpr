@@ -28,7 +28,6 @@ async function showStatistics() {
     await loadStatistics();
 }
 
-// Load statistics data and render all sections
 async function loadStatistics() {
     try {
         const sessionLog = await downloadJson("connection_sessions.json");
@@ -61,7 +60,6 @@ async function fetchUsersFromFirestore() {
     return users;
 }
 
-// Download JSON file
 async function downloadJson(filename) {
     const response = await fetch("https://api.itcpr.org/server/download", {
         method: "POST",
@@ -73,7 +71,6 @@ async function downloadJson(filename) {
     return await response.json();
 }
 
-// Parse logs into stats and row data
 function generateStats(sessionLog, accessData) {
     const stats = {};
     const rows = [];
@@ -129,7 +126,6 @@ function matchIpToUser(ip, accessData) {
     return null;
 }
 
-// Render user summary cards
 function renderSummary(stats, accessData, users) {
     const container = document.getElementById('dashboardContent');
     const section = document.createElement('div');
@@ -162,7 +158,6 @@ function renderSummary(stats, accessData, users) {
     }).join('');
 }
 
-// Render sessions, hours, and storage bar charts in HTML
 function plotCharts(stats, users) {
     const usersList = Object.keys(stats);
     const sessionCounts = usersList.map(u => stats[u].sessions);
@@ -197,7 +192,6 @@ function plotCharts(stats, users) {
     makeBarSection("Storage Used (GB)", storageSizes, "GB");
 }
 
-// Render timeline chart as HTML rows
 function plotTimeline(rows) {
     const users = [...new Set(rows.map(r => r.user))];
     const timelineWrapper = document.createElement('div');
@@ -244,7 +238,6 @@ function plotTimeline(rows) {
     });
 }
 
-// Most active day of the week
 function plotUsageByDay(usageByDay) {
     const section = document.createElement('div');
     section.className = 'section';
