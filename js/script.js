@@ -19,7 +19,7 @@ addEventListener('DOMContentLoaded', async () => {
             window.location.href = '/dashboard';
         } else {
             await signInWithGoogle();
-            loginBtn.click();
+            await checkAuthState();
         }
     });
 });
