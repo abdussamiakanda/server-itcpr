@@ -248,7 +248,6 @@ addEventListener('DOMContentLoaded', async () => {
         console.log('User data:', userData);
         await showDashboard();
     } else {
-        await signOutUser();
         window.location.href = '/';
     }
 });

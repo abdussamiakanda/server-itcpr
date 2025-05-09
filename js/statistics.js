@@ -219,7 +219,6 @@ addEventListener('DOMContentLoaded', async () => {
         userData = user;
         await showStatistics();
     } else {
-        await signOutUser();
         window.location.href = '/';
     }
 });
