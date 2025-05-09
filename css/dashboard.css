@@ -262,6 +262,13 @@
     align-items: center;
 }
 
+.server-control .description {
+    color: #d8d8d8;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+
 /* Modal Base */
 .modal {
     position: fixed;

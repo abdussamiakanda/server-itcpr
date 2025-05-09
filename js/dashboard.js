@@ -168,6 +168,24 @@ async function showDashboard() {
             </div>
         </div>
         ` : ''}
+
+        <!-- Server Control -->
+        ${ userData.serverCode ? `
+        <div class="section">
+            <div class="section-header">
+                <h3>Server Control</h3>
+            </div>
+            <div class="server-control">
+                <p class="description">
+                    Use the button below to remotely power on the server via ESP32-based Wake-on-LAN. This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+                </p>
+                <button class="btn btn-outline" onclick="sendWakeCommand()">
+                    Turn On Server
+                </button>
+            </div>
+        </div>
+        ` : ''}
+        <br>
     `;
 
     await fetchServerData();
@@ -758,6 +776,26 @@ async function getServerRequests() {
     return requestsHtml;
 }
 
+window.sendWakeCommand = async function () {
+    try {
+        const response = await fetch('https://api.itcpr.org/server/wake', {
+            method: 'POST'
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Server responded with ${response.status}: ${errorText}`);
+        }
+
+        const result = await response.text();
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error('Error sending wake command:', error);
+        return null;
+    }
+}
+
 function convertToLocalTime(input, gmtOffset='GMT-6') {
     const inputWithOffset = `${input} ${gmtOffset}`;
     const date = new Date(inputWithOffset);
@@ -801,7 +839,6 @@ addEventListener('DOMContentLoaded', async () => {
     const user = await checkAuthState();
     if (user) {
         userData = user;
-        console.log('User data:', userData);
         await showDashboard();
     } else {
         await signOutUser();
