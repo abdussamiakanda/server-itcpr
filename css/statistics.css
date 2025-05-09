@@ -50,7 +50,7 @@ canvas {
     background-color: #222;
     height: 20px;
     border-radius: 6px;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
 }
 
@@ -72,6 +72,11 @@ canvas {
 .bar-value {
     color: #fff;
     mix-blend-mode: difference; /* Makes text adapt to background brightness */
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateY(-5%);
+    font-size: 0.85rem;
     font-weight: bold;
 }  
 

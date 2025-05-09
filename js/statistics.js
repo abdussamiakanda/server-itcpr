@@ -1,4 +1,4 @@
-// statistics.js
+import { where, collection, getDocs, query } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 import { checkAuthState, signOutUser, db } from "./auth.js";
 
 let userData = null;
@@ -33,20 +33,32 @@ async function loadStatistics() {
     try {
         const sessionLog = await downloadJson("connection_sessions.json");
         const accessData = await downloadJson("access_codes.json");
+        const users = await fetchUsersFromFirestore();
 
         const { stats, rows, usageByHour, usageByDay } = generateStats(sessionLog, accessData);
 
         const dashboardContent = document.getElementById('dashboardContent');
         dashboardContent.innerHTML = ``;
 
-        renderSummary(stats);
-        plotCharts(stats);
+        renderSummary(stats, accessData, users);
+        plotCharts(stats, users);
         plotTimeline(rows);
         plotUsageByDay(usageByDay);
     } catch (error) {
         console.error('Error loading statistics:', error);
         document.getElementById('dashboardContent').innerHTML = "<p class='error-message'>Error loading statistics.</p>";
     }
+}
+
+async function fetchUsersFromFirestore() {
+    const usersRef = collection(db, "users");
+    const q = query(usersRef, where("serverStorage", ">", 0));
+    const snapshot = await getDocs(q);
+    const users = {};
+    snapshot.forEach(doc => {
+        users[doc.id] = doc.data();
+    });
+    return users;
 }
 
 // Download JSON file
@@ -118,7 +130,7 @@ function matchIpToUser(ip, accessData) {
 }
 
 // Render user summary cards
-function renderSummary(stats) {
+function renderSummary(stats, accessData, users) {
     const container = document.getElementById('dashboardContent');
     const section = document.createElement('div');
     section.className = 'section';
@@ -135,59 +147,54 @@ function renderSummary(stats) {
         const totalMinutes = Math.floor(data.total_minutes);
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
+        const firestoreUser = Object.values(users).find(u => u.name === user);
+        const storage = ((firestoreUser?.serverStorage || 0) / 1024).toFixed(2);
+
         return `
             <div class="user-summary">
                 <h4>${user}</h4>
                 <p>Total Sessions: ${data.sessions}</p>
                 <p>Total Time: ${hours}h ${minutes}m</p>
                 <p>IPs Used: ${[...data.ips].join(", ")}</p>
+                <p>Storage: ${storage} GB</p>
             </div>
         `;
     }).join('');
 }
 
-// Render sessions and hours bar charts in HTML
-function plotCharts(stats) {
-    const users = Object.keys(stats);
-    const sessionCounts = users.map(u => stats[u].sessions);
-    const totalHours = users.map(u => (stats[u].total_minutes / 60).toFixed(2));
+// Render sessions, hours, and storage bar charts in HTML
+function plotCharts(stats, users) {
+    const usersList = Object.keys(stats);
+    const sessionCounts = usersList.map(u => stats[u].sessions);
+    const totalHours = usersList.map(u => (stats[u].total_minutes / 60).toFixed(2));
+    const storageSizes = usersList.map(u => {
+        const firestoreUser = Object.values(users).find(user => user.name === u);
+        return ((firestoreUser?.serverStorage || 0) / 1024).toFixed(2);
+    });
 
     const container = document.getElementById('dashboardContent');
-    const section = document.createElement('div');
-    section.className = 'section';
-    section.innerHTML = `<div class="section-header"><h3>Sessions per User</h3></div>`;
-    container.appendChild(section);
 
-    users.forEach((user, i) => {
-        const bar = document.createElement('div');
-        bar.className = 'bar-row';
-        bar.innerHTML = `
-            <div class="bar-label">${user}</div>
-            <div class="bar-track">
-                <div class="bar-fill animate-bar" style="width: ${sessionCounts[i] * 10}px" title="${sessionCounts[i]} sessions">
-                    <span class="bar-value">${sessionCounts[i]}</span>
-                </div>
-            </div>`;
-        section.appendChild(bar);
-    });
+    const makeBarSection = (title, values, unit) => {
+        const section = document.createElement('div');
+        section.className = 'section';
+        section.innerHTML = `<div class="section-header"><h3>${title}</h3></div>`;
+        usersList.forEach((user, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'bar-row';
+            bar.innerHTML = `
+                <div class="bar-label">${user}</div>
+                <div class="bar-track">
+                    <div class="bar-fill animate-bar" style="width: ${(values[i] / Math.max(...values)) * 100}%" title="${values[i]} ${unit}"></div>
+                    <span class="bar-value">${values[i]}</span>
+                </div>`;
+            section.appendChild(bar);
+        });
+        container.appendChild(section);
+    };
 
-    const hoursSection = document.createElement('div');
-    hoursSection.className = 'section';
-    hoursSection.innerHTML = `<div class="section-header"><h3>Total Connected Time (Hours)</h3></div>`;
-    container.appendChild(hoursSection);
-
-    users.forEach((user, i) => {
-        const bar = document.createElement('div');
-        bar.className = 'bar-row';
-        bar.innerHTML = `
-            <div class="bar-label">${user}</div>
-            <div class="bar-track">
-                <div class="bar-fill animate-bar" style="width: ${totalHours[i] * 10}px" title="${totalHours[i]} hours">
-                    <span class="bar-value">${totalHours[i]}</span>
-                </div>
-            </div>`;
-        hoursSection.appendChild(bar);
-    });
+    makeBarSection("Sessions per User", sessionCounts, "sessions");
+    makeBarSection("Total Connected Time (Hours)", totalHours, "hours");
+    makeBarSection("Storage Used (GB)", storageSizes, "GB");
 }
 
 // Render timeline chart as HTML rows
@@ -251,9 +258,8 @@ function plotUsageByDay(usageByDay) {
         bar.innerHTML = `
             <div class="bar-label">${day}</div>
             <div class="bar-track">
-                <div class="bar-fill animate-bar" style="width: ${count * 10}px" title="${count} sessions">
-                    <span class="bar-value">${count}</span>
-                </div>
+                <div class="bar-fill animate-bar" style="width: ${(count / Math.max(...Object.values(usageByDay))) * 100}%" title="${count} sessions"></div>
+                <span class="bar-value">${count}</span>
             </div>`;
         section.appendChild(bar);
     });
