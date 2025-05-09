@@ -6,14 +6,25 @@
     <title>ITCPR Server</title>
     <link rel="shortcut icon" href="https://portal.itcpr.org/assets/logo.png">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <header>
-        <h1>ITCPR Computing Server</h1>
-        <p class="subtitle">Institute for Theoretical and Computational Physics Research</p>
+        <h1>ITCPR Server</h1>
+        <nav>
+            <div id="loginBtn">Login</div>
+        </nav>
     </header>
 
     <main>
+        <section class="card">
+            <h2>About The Server</h2>
+            <p>
+                These private servers are maintained by Institute for Theoretical and Computational Physics Research (ITCPR) to support theoretical and computational physics research,
+                data storage, code development, and remote access for authorized researchers, staff, and collaborators.
+            </p>
+        </section>
+
         <section class="card">
             <h2>Server Specifications — Alpha</h2>
             <div class="specs-grid">
@@ -34,14 +45,6 @@
                 <div><strong>Storage:</strong> Samsung 970 EVO plus 500 GB PCIe 4.0 NVME SSD, and Toshiba 2 TB HDD</div>
                 <div><strong>Operating System:</strong> Windows 10 & Linux</div>
             </div>
-        </section>
-
-        <section class="card">
-            <h2>About The Server</h2>
-            <p>
-                These private servers are maintained by ITCPR to support theoretical and computational physics research,
-                data storage, code development, and remote access for authorized researchers, staff, and collaborators.
-            </p>
         </section>
 
         <section class="card">
@@ -92,6 +95,6 @@
         &copy; <span id="year"></span> ITCPR. All Rights Reserved.
     </footer>
 
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>

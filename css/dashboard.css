@@ -1,0 +1,382 @@
+/* Overview Container */
+.overview-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.stat-card {
+    background-color: #1b1b1b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 300px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-icon {
+    color: #00c4cc;
+    font-size: 1.5rem;
+}
+
+.stat-title {
+    color: #00c4cc;
+    font-size: 1.1rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-info {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* Section Block */
+.section {
+    background-color: #1a1a1a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 1100px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.section-header h3 {
+    font-size: 1.4rem;
+    color: #00c4cc;
+}
+
+.btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn .material-icons {
+    margin-right: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid #00c4ccd6;
+    color: #ddd;
+
+}
+
+.btn-outline:hover {
+    background-color: #00c5cc9b;
+}
+
+.btn-success {
+    background-color: #111;
+    color: #ddd;
+    border: 1px solid #28a7469a;
+}
+
+.btn-danger {
+    background-color: #111;
+    color: #ddd;
+    border: 1px solid #dc3546a3;
+}
+
+.btn-sm {
+    padding: 4px 5px;
+    font-size: 0.85rem;
+}
+
+.server-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.server-users-table th,
+.server-users-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+}
+
+.server-users-table th {
+    color: #00c4cc;
+    background-color: #1c1c1c;
+}
+
+.server-users-table td {
+    color: #ddd;
+}
+
+.server-request-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.server-user-card {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.server-user-header {
+    font-size: 1rem;
+}
+
+.server-user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* Resilio */
+.resilio-users-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.resilio-user-card {
+    background-color: #222;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.resilio-user-card:hover {
+    background-color: #333;
+}
+
+.resilio-user-card .name {
+    color: #00c4cc;
+    padding: 0.5rem 1rem;
+    border-right: 1px solid #444;
+}
+
+.resilio-user-card .link {
+    overflow: hidden;
+    flex: 1;
+    padding: 0.5rem 1rem;
+}
+
+.resilio-user-card .spacer {
+    padding: 1.3rem 0.5rem;
+    border-right: 1px solid #444;
+}
+
+.resilio-user-card .delete,
+.resilio-user-card .copy {
+    cursor: pointer;
+    color: #00c4cc;
+    padding: 0.75rem 1rem;
+    transition: transform 0.2s;
+}
+
+.resilio-user-card .copy {
+    border-radius: 0 8px 8px 0;
+}
+
+.resilio-user-card .delete .material-icons,
+.resilio-user-card .copy .material-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.resilio-user-card .delete:hover,
+.resilio-user-card .copy:hover {
+    background-color: #00c5cc41;
+}
+
+.server_guide {
+    color: #66d9ef;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.server_guide:hover {
+    color: #00c4cc;
+}
+
+.server-code {
+    background-color: #1b1b1b;
+    color: #ddd;
+    padding: 0.2rem 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.server-code .material-icons {
+    font-size: 1.2rem;
+    color: #00c4cc;
+}
+
+.server-access ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.server-access ul li {
+    background-color: #222;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Modal Base */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    z-index: 1001;
+    width: 100%;
+    max-width: 600px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+}
+
+.modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+}
+
+/* Modal Content Sections */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.modal-header h3 {
+    font-size: 1.3rem;
+    color: #00c4cc;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close:hover {
+    color: #fff;
+}
+
+.modal-body {
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #111;
+    color: #ddd;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #00c4cc;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: #00c4cc;
+    color: #111;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #009ba1;
+}

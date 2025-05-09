@@ -1,0 +1,137 @@
+/* WSL Commands Section */
+.wsl-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1 1 30%;
+}
+
+.filter-group label {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.filter-group select,
+.filter-group input[type="date"] {
+    background-color: #111;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 0.95rem;
+}
+
+.filter-group select:focus,
+.filter-group input[type="date"]:focus {
+    border-color: #00c4cc;
+    outline: none;
+}
+
+/* WSL Commands Table */
+.wsl-log-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.wsl-log-table thead {
+    background-color: #222;
+}
+
+.wsl-log-table thead th {
+    padding: 12px 10px;
+    text-align: left;
+    color: #00c4cc;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    white-space: nowrap;
+}
+
+.wsl-log-table tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    color: #ddd;
+    white-space: nowrap;
+}
+
+.wsl-log-table tbody tr:hover {
+    background-color: #2a2a2a;
+}
+
+/* Highlight sudo commands */
+.wsl-log-table tbody tr.sudo-command {
+    background-color: #331111;
+    border-left: 5px solid #dc3545;
+}
+
+.wsl-log-table tbody tr.sudo-command:hover {
+    background-color: #441414;
+}
+
+.wsl-log-table tbody tr td:last-child {
+    word-break: break-word;
+    white-space: break-spaces;
+}
+
+/* Error message */
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    padding: 1rem;
+    background-color: #220000;
+    border-radius: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 700px) {
+    .wsl-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .wsl-log-table thead {
+        display: none;
+    }
+
+    .wsl-log-table, 
+    .wsl-log-table tbody, 
+    .wsl-log-table tr, 
+    .wsl-log-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .wsl-log-table tr {
+        margin-bottom: 1rem;
+        background-color: #222;
+        border-radius: 8px;
+    }
+
+    .wsl-log-table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+
+    .wsl-log-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        text-align: left;
+        font-weight: bold;
+        color: #00c4cc;
+    }
+}

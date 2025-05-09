@@ -1,0 +1,30 @@
+.statistics-summary {
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.user-summary {
+    background-color: #1a1a1a;
+    padding: 1.2rem;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.user-summary h4 {
+    color: #00c4cc;
+    margin-bottom: 0.5rem;
+}
+
+.user-summary p {
+    margin: 0.2rem 0;
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+canvas {
+    background-color: #111;
+    padding: 1rem;
+    border-radius: 10px;
+}

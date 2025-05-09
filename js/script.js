@@ -1,23 +1,25 @@
-// Set year
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { checkAuthState } from "./auth.js";
+
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Fetch server stats
-// fetch('https://api.itcpr.org/server/stats')
-//     .then(res => res.json())
-//     .then(data => {
-//         document.getElementById('lastUpdated').textContent = data.last_updated;
-//         document.getElementById('memory').textContent = `${data.memory.percent_used}% used (${data.memory.used} / ${data.memory.total})`;
-//         document.getElementById('disk').textContent = `${data.disk.percent_used}% used (${data.disk.used} / ${data.disk.total})`;
-//         document.getElementById('temp').textContent = `${data.cpu_temperature} °C`;
-//         const days = Math.floor(data.uptime.hours / 24);
-//         const hours = data.uptime.hours % 24;
-//         document.getElementById('uptime').textContent = `${days} days, ${hours} hours`;
-//     })
-//     .catch(err => {
-//         console.error('Failed to load server stats:', err);
-//         document.getElementById('lastUpdated').textContent = 'Unavailable';
-//         document.getElementById('memory').textContent = 'Unavailable';
-//         document.getElementById('disk').textContent = 'Unavailable';
-//         document.getElementById('temp').textContent = 'Unavailable';
-//         document.getElementById('uptime').textContent = 'Unavailable';
-//     });
+async function signInWithGoogle() {
+    try {
+        await signInWithPopup(getAuth(), new GoogleAuthProvider());
+    } catch (error) {
+        console.error('Error signing in with Google:', error);
+    }
+}
+
+addEventListener('DOMContentLoaded', async () => {
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.addEventListener('click', async () => {
+        const user = await checkAuthState();
+        if (user) {
+            window.location.href = '/dashboard';
+        } else {
+            await signInWithGoogle();
+            loginBtn.click();
+        }
+    });
+});

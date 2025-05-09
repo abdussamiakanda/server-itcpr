@@ -23,32 +23,64 @@ body {
 
 /* Header */
 header {
-    text-align: center;
+    width: 100%;
+    max-width: 1150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2rem;
-}
-
-.logo {
-    width: 90px;
-    margin-bottom: 10px;
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    background-color: #111;
+    z-index: 1000;
 }
 
 h1 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     color: #00c4cc;
 }
 
-.subtitle {
+nav {
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #222;
+    border: 1px solid #00c4cc;
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+nav div:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+nav div.selected {
+    background-color: #00c5cc48;
+}
+
+nav div span.material-icons {
+    color: #00c4cc;
+    font-weight: bold;
     font-size: 1.2rem;
-    color: #aaa;
 }
 
 /* Cards */
 main {
     width: 100%;
-    max-width: 960px;
+    max-width: 1100px;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
+    margin-top: 80px;
 }
 
 .card {
