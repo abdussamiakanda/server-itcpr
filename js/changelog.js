@@ -158,6 +158,10 @@ async function getAvailablePackages() {
     return html;
 }
 
+window.goToPage = async function(page) {
+    window.location.href = `./${page}`;
+}
+
 addEventListener('DOMContentLoaded', async () => {
     const user = await checkAuthState();
     if (user) {
