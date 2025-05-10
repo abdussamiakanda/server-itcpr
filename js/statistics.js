@@ -15,6 +15,9 @@ async function showStatistics() {
         <div onclick="goToPage('monitor')">
             <span class="material-icons">track_changes</span> Monitor
         </div>
+        <div onclick="goToPage('changelog')">
+            <span class="material-icons">history</span> Changelog
+        </div>
         <div id="logoutBtn">
             <span class="material-icons">logout</span> Logout
         </div>

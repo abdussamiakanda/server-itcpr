@@ -10,20 +10,19 @@ async function showDashboard() {
     const navbar = document.getElementById('navbar');
     navbar.innerHTML = `
         <div onclick="goToPage('dashboard')">
-            <span class="material-icons">home</span>
-            Dashboard
+            <span class="material-icons">home</span> Dashboard
         </div>
         <div onclick="goToPage('statistics')">
-            <span class="material-icons">bar_chart</span>
-            Statistics
+            <span class="material-icons">bar_chart</span> Statistics
         </div>
         <div class="selected">
-            <span class="material-icons">track_changes</span>
-            Monitor
+            <span class="material-icons">track_changes</span> Monitor
+        </div>
+        <div onclick="goToPage('changelog')">
+            <span class="material-icons">history</span> Changelog
         </div>
         <div id="logoutBtn">
-            <span class="material-icons">logout</span>
-            Logout
+            <span class="material-icons">logout</span> Logout
         </div>
     `;
 
@@ -259,7 +258,6 @@ addEventListener('DOMContentLoaded', async () => {
     const user = await checkAuthState();
     if (user) {
         userData = user;
-        console.log('User data:', userData);
         await showDashboard();
     } else {
         window.location.href = '/';

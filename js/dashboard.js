@@ -31,6 +31,10 @@ async function showDashboard() {
             <span class="material-icons">track_changes</span>
             Monitor
         </div>
+        <div onclick="goToPage('changelog')">
+            <span class="material-icons">history</span>
+            Changelog
+        </div>
         <div id="logoutBtn">
             <span class="material-icons">logout</span>
             Logout
@@ -254,7 +258,6 @@ async function submitServerAccess() {
         <p>ZeroTier ID: <b>${zerotierId}</b></p>
         <p>Please review and approve or reject the request.</p>
     `));
-    await loadUserInfo();
     await postActivity(userData.uid, {
         type: 'Server Access',
         message: `You requested server access with ZeroTier ID: ${zerotierId} on ${formatDate(new Date())}.`,

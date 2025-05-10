@@ -1,0 +1,75 @@
+.section-header input {
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    border: 1px solid #00c5cc87;
+    color: #00c4cc;
+}
+
+.section-header input::placeholder {
+    color: #aaa;
+}
+
+.section-header input:hover {
+    background-color: #333;
+}
+
+.section-header input:active {
+    background-color: #444;
+}
+
+.section-header input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #00c4cc;
+}
+
+.windows-software-list ul {
+    list-style: none;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.windows-software-list li {
+    position: relative;
+    padding-left: 1.5rem; /* Leave space for the ✔ icon */
+}
+
+.windows-software-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    margin-right: 5px;
+    color: #00c4cc;
+    font-size: 1rem;
+}
+
+.wsl-software-list ul {
+    list-style: none;
+    padding-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.wsl-software-list li {
+    position: relative;
+    padding-left: 1.5rem; /* Leave space for the ✔ icon */
+}
+
+.wsl-software-list li::before {
+    content: '✔';
+    position: absolute;
+    left: 0;
+    margin-right: 5px;
+    color: #00c4cc;
+    font-size: 1rem;
+}
+
+
