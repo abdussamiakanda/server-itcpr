@@ -1,31 +1,19 @@
 .section-header input {
-    padding: 6px 14px;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+    background-color: #111;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 6px 10px;
     font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #222;
-    border: 1px solid #00c5cc87;
-    color: #00c4cc;
+}
+
+.section-header input:focus {
+    border-color: #00c4cc;
+    outline: none;
 }
 
 .section-header input::placeholder {
     color: #aaa;
-}
-
-.section-header input:hover {
-    background-color: #333;
-}
-
-.section-header input:active {
-    background-color: #444;
-}
-
-.section-header input:focus {
-    outline: none;
-    box-shadow: 0 0 5px #00c4cc;
 }
 
 .windows-software-list ul {

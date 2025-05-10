@@ -1,3 +1,21 @@
+.section-header input {
+    background-color: #111;
+    color: #ddd;
+    border: 1px solid #444;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 0.95rem;
+}
+
+.section-header input:focus {
+    border-color: #00c4cc;
+    outline: none;
+}
+
+.section-header input::placeholder {
+    color: #aaa;
+}
+
 /* WSL Commands Section */
 .wsl-filters {
     display: flex;

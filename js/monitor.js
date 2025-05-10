@@ -37,12 +37,24 @@ async function showDashboard() {
         <div class="section">
             <div class="section-header">
                 <h3>WSL Commands Log</h3>
+                <input type="text" id="searchInput" placeholder="Search...">
             </div>
             <div class="server-wsl-commands-list">
                 ${await getServerWSLCommands()}
             </div>
         </div>
     `;
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function () {
+        const filter = this.value.toLowerCase();
+        const details = document.querySelector('.server-wsl-commands-list');
+        const items = details.querySelectorAll('tr');
+
+        items.forEach(item => {
+            const text = item.innerText.toLowerCase();
+            item.style.display = text.includes(filter) ? '' : 'none';
+        });
+    });
 }
 
 async function getWSLServersUsers() {
@@ -81,7 +93,7 @@ async function getServerWSLCommands() {
             logData = logData.filter(log => userIps.includes(log.ip));
         }
 
-        logData = logData.slice(0, 100);
+        logData = logData.slice(0, 1000);
 
         const users = [...new Set(parseLogData(logText).map(log => log.ip))];
         const commands = [...new Set(parseLogData(logText).map(log => log.commandId))];
