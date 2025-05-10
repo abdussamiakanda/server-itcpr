@@ -39,6 +39,11 @@ header {
 h1 {
     font-size: 2rem;
     color: #00c4cc;
+    cursor: pointer;
+}
+
+h1:hover {
+    color: #039297;
 }
 
 nav {

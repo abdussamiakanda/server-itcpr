@@ -11,6 +11,10 @@ async function signInWithGoogle() {
     }
 }
 
+window.goToPage = function(page) {
+    window.location.href = `/${page}`;
+}
+
 addEventListener('DOMContentLoaded', async () => {
     const loginBtn = document.getElementById('loginBtn');
     loginBtn.addEventListener('click', async () => {
