@@ -126,10 +126,16 @@ async function getAvailableSoftwares() {
 
     let html = '<details><ul>';
     Object.values(data).forEach(item => {
+        let formattedDateShort = '';
+        if (item.install_date) {
+            const formattedDate = item.install_date ? `${item.install_date.slice(0, 4)}-${item.install_date.slice(4, 6)}-${item.install_date.slice(6)}` : '';
+            const date = new Date(formattedDate);
+            formattedDateShort = date.toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
         html += `
             <li>
-                <strong>${item.name}</strong> — 
-                <span style="color:gray">(${item.install_date || ''})</span>
+                ${item.name}
+                <span style="color:gray"> — (${formattedDateShort || 'Unknown date'})</span>
             </li>
         `;
     });
@@ -145,12 +151,15 @@ async function getAvailablePackages() {
 
     let html = '<details><ul>';
     Object.values(data).forEach(item => {
+        let formattedDateShort = '';
+        if (item.install_datetime) {
+            const date = new Date(item.install_datetime);
+            formattedDateShort = date.toLocaleDateString('en-US', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
         html += `
             <li>
-                <strong>${item.name}</strong> — 
-                <code>${item.version || 'unknown'}</code> 
-                <span style="color:gray">[${item.action || 'install'}]</span> 
-                <span style="color:gray">(${item.install_datetime || ''})</span>
+                ${item.name}
+                <span style="color:gray"> — ${item.version || 'unknown'} [${item.action === 'install' ? 'installed' : 'upgraded'}] (${formattedDateShort || 'Unknown date'})</span>
             </li>
         `;
     });
