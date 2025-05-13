@@ -15,6 +15,7 @@ window.updateAccess = updateAccess;
 
 let userData = null;
 let wslServerUsers = {};
+let lastUpdated = null;
 
 async function showDashboard() {
     const navbar = document.getElementById('navbar');
@@ -68,6 +69,8 @@ async function showDashboard() {
             document.getElementById('disk_used_total').innerText = `Used: ${serverData.disk.used} / ${serverData.disk.total}`;
             document.getElementById('server_temp').innerHTML = `${serverData.cpu_temperature}&#176; C`;
             document.getElementById('server_uptime').innerText = `Uptime: ${days} days, ${hours} hours`;
+
+            lastUpdated = serverData.last_updated;
 
             await getServerUsers(serverData.active_connections);
         } catch (error) {
@@ -180,12 +183,7 @@ async function showDashboard() {
                 <h3>Server Control</h3>
             </div>
             <div class="server-control">
-                <p class="description">
-                    Use the button below to remotely power on the server via ESP32-based Wake-on-LAN. This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
-                </p>
-                <button class="btn btn-outline" onclick="sendWakeCommand()">
-                    Turn On Server
-                </button>
+                <div class="server-control-item" id="server-onBtn"></div>
             </div>
         </div>
         ` : ''}
@@ -195,6 +193,32 @@ async function showDashboard() {
     await fetchServerData();
 
     setInterval(fetchServerData, 20000);
+    await showServerControl();
+}
+
+async function showServerControl() {
+    const onBtn = document.getElementById('server-onBtn');
+    const parsedTime = luxon.DateTime.fromFormat(lastUpdated, "hh:mm a; LLL dd, yyyy", { zone: "America/Chicago" }).setZone(luxon.DateTime.local().zoneName);
+    const now = luxon.DateTime.local();
+
+    const diffInMinutes = now.diff(parsedTime, "minutes").toObject().minutes;
+
+    if (diffInMinutes > 5) {
+        onBtn.innerHTML = `
+            <p class="description">
+                Use the button below to remotely power on the server via ESP32-based Wake-on-LAN. This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+            </p>
+            <button class="btn btn-outline" onclick="sendWakeCommand()">
+                Turn On Server
+            </button>
+        `;
+    } else {
+        onBtn.innerHTML = `
+            <p class="description">
+                The server is currently powered on.
+            </p>
+        `;
+    }
 }
 
 window.goToPage = async function(page) {
