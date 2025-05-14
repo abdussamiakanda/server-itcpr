@@ -81,7 +81,7 @@ async function showDashboard() {
 
     const dashboardContent = document.getElementById('dashboardContent');
     dashboardContent.innerHTML = `
-        <div class="overview-container">
+        <div class="overview-container" id="overviewContainer">
             <div class="stat-card">
                 <div class="stat-header">
                     <span class="material-icons stat-icon">dns</span>
@@ -175,18 +175,6 @@ async function showDashboard() {
             </div>
         </div>
         ` : ''}
-
-        <!-- Server Control -->
-        ${ userData.serverCode ? `
-        <div class="section">
-            <div class="section-header">
-                <h3>Server Control</h3>
-            </div>
-            <div class="server-control">
-                <div class="server-control-item" id="server-onBtn"></div>
-            </div>
-        </div>
-        ` : ''}
         <br>
     `;
 
@@ -197,7 +185,7 @@ async function showDashboard() {
 }
 
 async function showServerControl() {
-    const onBtn = document.getElementById('server-onBtn');
+    const onBtn = document.getElementById('overviewContainer');
     const parsedTime = luxon.DateTime.fromFormat(lastUpdated, "hh:mm a; LLL dd, yyyy", { zone: "America/Chicago" }).setZone(luxon.DateTime.local().zoneName);
     const now = luxon.DateTime.local();
 
@@ -205,18 +193,16 @@ async function showServerControl() {
 
     if (diffInMinutes > 5) {
         onBtn.innerHTML = `
-            <p class="description">
-                Use the button below to remotely power on the server via ESP32-based Wake-on-LAN. This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
-            </p>
-            <button class="btn btn-outline" onclick="sendWakeCommand()">
-                Turn On Server
-            </button>
-        `;
-    } else {
-        onBtn.innerHTML = `
-            <p class="description">
-                The server is currently powered on.
-            </p>
+            <div class="stat-card-full">
+                <p class="description">
+                    The server is currently powered off.
+                    Use the button below to remotely power on the server via ESP32-based Wake-on-LAN.
+                    This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+                </p>
+                <button class="btn btn-outline" onclick="sendWakeCommand()">
+                    Turn On Server
+                </button>
+            </div>
         `;
     }
 }
@@ -806,7 +792,11 @@ async function getServerRequests() {
 window.sendWakeCommand = async function () {
     try {
         const response = await fetch('https://api.itcpr.org/server/wake', {
-            method: 'POST'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: userData.name })
         });
 
         if (!response.ok) {

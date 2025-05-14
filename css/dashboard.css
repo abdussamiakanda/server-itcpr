@@ -14,6 +14,21 @@
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
 }
 
+.stat-card-full {
+    background-color: #1b1b1b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card-full p {
+    margin-bottom: 20px;
+}
+
+.stat-card-full button {
+    margin: 0 auto;
+}
+
 .stat-header {
     display: flex;
     align-items: center;
