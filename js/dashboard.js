@@ -15,7 +15,6 @@ window.updateAccess = updateAccess;
 
 let userData = null;
 let wslServerUsers = {};
-let lastUpdated = null;
 
 async function showDashboard() {
     const navbar = document.getElementById('navbar');
@@ -50,65 +49,9 @@ async function showDashboard() {
 
     await getWSLServersUsers();
 
-    const fetchServerData = async () => {
-        try {
-            console.log('Fetching server data...');
-            const response = await fetch('https://api.itcpr.org/server/stats');
-            
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            const serverData = await response.json();
-            const days = Math.floor(serverData.uptime.hours / 24);
-            const hours = serverData.uptime.hours % 24;
-
-            document.getElementById('memory_percent_used').innerText = serverData.memory.percent_used;
-            document.getElementById('memory_used_total').innerText = `Used: ${serverData.memory.used} / ${serverData.memory.total}`;
-            document.getElementById('disk_percent_used').innerText = serverData.disk.percent_used;
-            document.getElementById('disk_used_total').innerText = `Used: ${serverData.disk.used} / ${serverData.disk.total}`;
-            document.getElementById('server_temp').innerHTML = `${serverData.cpu_temperature}&#176; C`;
-            document.getElementById('server_uptime').innerText = `Uptime: ${days} days, ${hours} hours`;
-
-            lastUpdated = serverData.last_updated;
-
-            await getServerUsers(serverData.active_connections);
-        } catch (error) {
-            console.error('Error loading server content:', error);
-            elements.contentArea.innerHTML = `<p class="error-message">Error loading server details.</p>`;
-        }
-    };
-
     const dashboardContent = document.getElementById('dashboardContent');
     dashboardContent.innerHTML = `
-        <div class="overview-container" id="overviewContainer">
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">dns</span>
-                    <span class="stat-title">Server Memory</span>
-                </div>
-                <div class="stat-value" id="memory_percent_used"></div>
-                <div class="stat-info" id="memory_used_total"></div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">save</span>
-                    <span class="stat-title">Server Storage</span>
-                </div>
-                <div class="stat-value" id="disk_percent_used"></div>
-                <div class="stat-info" id="disk_used_total"></div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">device_thermostat</span>
-                    <span class="stat-title">Server Temperature</span>
-                </div>
-                <div class="stat-value" id="server_temp"></div>
-                <div class="stat-info" id="server_uptime"></div>
-            </div>
-        </div>
+        <div class="overview-container" id="overviewContainer"></div>
 
         <!-- Active Connections -->
         <div class="section">
@@ -181,29 +124,75 @@ async function showDashboard() {
     await fetchServerData();
 
     setInterval(fetchServerData, 20000);
-    await showServerControl();
 }
 
-async function showServerControl() {
-    const onBtn = document.getElementById('overviewContainer');
-    const parsedTime = luxon.DateTime.fromFormat(lastUpdated, "hh:mm a; LLL dd, yyyy", { zone: "America/Chicago" }).setZone(luxon.DateTime.local().zoneName);
-    const now = luxon.DateTime.local();
+async function fetchServerData() {
+    try {
+        console.log('Fetching server data...');
+        const response = await fetch('https://api.itcpr.org/server/stats');
+        
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
 
-    const diffInMinutes = now.diff(parsedTime, "minutes").toObject().minutes;
+        const serverData = await response.json();
+        const days = Math.floor(serverData.uptime.hours / 24);
+        const hours = serverData.uptime.hours % 24;
 
-    if (diffInMinutes > 5) {
-        onBtn.innerHTML = `
-            <div class="stat-card-full">
-                <p class="description">
-                    The server is currently powered off.
-                    Use the button below to remotely power on the server via ESP32-based Wake-on-LAN.
-                    This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
-                </p>
-                <button class="btn btn-outline" onclick="sendWakeCommand()">
-                    Turn On Server
-                </button>
+        const overviewContainer = document.getElementById('overviewContainer');
+        const parsedTime = luxon.DateTime.fromFormat(serverData.last_updated, "hh:mm a; LLL dd, yyyy", { zone: "America/Chicago" }).setZone(luxon.DateTime.local().zoneName);
+        const now = luxon.DateTime.local();
+
+        const diffInMinutes = now.diff(parsedTime, "minutes").toObject().minutes;
+
+        if (diffInMinutes > 2) {
+            overviewContainer.innerHTML = `
+                <div class="stat-card-full">
+                    <p class="description">
+                        The server is currently powered off.
+                        Use the button below to remotely power on the server via ESP32-based Wake-on-LAN.
+                        This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+                    </p>
+                    <button class="btn btn-outline" onclick="sendWakeCommand()" id="wakeBtn">
+                        Turn On Server
+                    </button>
+                </div>
+            `;
+        } else {
+            overviewContainer.innerHTML = `
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="material-icons stat-icon">dns</span>
+                    <span class="stat-title">Server Memory</span>
+                </div>
+                <div class="stat-value">${serverData.memory.percent_used}</div>
+                <div class="stat-info">Used: ${serverData.memory.used} / ${serverData.memory.total}</div>
             </div>
-        `;
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="material-icons stat-icon">save</span>
+                    <span class="stat-title">Server Storage</span>
+                </div>
+                <div class="stat-value">${serverData.disk.percent_used}</div>
+                <div class="stat-info">Used: ${serverData.disk.used} / ${serverData.disk.total}</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <span class="material-icons stat-icon">device_thermostat</span>
+                    <span class="stat-title">Server Temperature</span>
+                </div>
+                <div class="stat-value">${serverData.cpu_temperature}&#176; C</div>
+                <div class="stat-info">Uptime: ${days} days, ${hours} hours</div>
+            </div>
+            `;
+        }
+
+        await getServerUsers(serverData.active_connections);
+    } catch (error) {
+        console.error('Error loading server content:', error);
+        elements.contentArea.innerHTML = `<p class="error-message">Error loading server details.</p>`;
     }
 }
 
@@ -806,6 +795,19 @@ window.sendWakeCommand = async function () {
 
         const result = await response.text();
         console.log(result);
+        const overviewContainer = document.getElementById('overviewContainer');
+        wakeBtn.innerHTML = `
+            <div class="stat-card-full">
+                <p class="description">
+                    Server wake command sent successfully.
+                    Use the button below to remotely power off the server via ESP32-based Wake-on-LAN.
+                    This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+                </p>
+                <button class="btn btn-outline" onclick="sendWakeCommand()" id="wakeBtn">
+                    Turn Off Server
+                </button>
+            </div>
+        `;
         return result;
     } catch (error) {
         console.error('Error sending wake command:', error);
