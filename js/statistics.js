@@ -232,7 +232,7 @@ function plotTimeline(rows) {
             bar.className = 'timeline-bar animate-bar';
             bar.style.left = `${leftPercent}%`;
             bar.style.width = `${widthPercent}%`;
-            bar.title = `${session.t_in.toFormat('hh:mm a')} - ${session.t_out.toFormat('hh:mm a')}`;
+            bar.title = `${session.t_in.toFormat('dd MMM yyyy, hh:mm a')} - ${session.t_out.toFormat('dd MMM yyyy, hh:mm a')}`;
             track.appendChild(bar);
         });
 
