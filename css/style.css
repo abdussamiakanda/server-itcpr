@@ -28,7 +28,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 2rem;
     position: fixed;
     top: 0;
     padding: 10px;
@@ -121,7 +120,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    margin-top: 80px;
+    margin-top: 70px;
 }
 
 .card {

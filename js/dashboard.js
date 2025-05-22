@@ -796,16 +796,13 @@ window.sendWakeCommand = async function () {
         const result = await response.text();
         console.log(result);
         const overviewContainer = document.getElementById('overviewContainer');
-        wakeBtn.innerHTML = `
+        overviewContainer.innerHTML = `
             <div class="stat-card-full">
                 <p class="description">
                     Server wake command sent successfully.
                     Use the button below to remotely power off the server via ESP32-based Wake-on-LAN.
                     This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
                 </p>
-                <button class="btn btn-outline" onclick="sendWakeCommand()" id="wakeBtn">
-                    Turn Off Server
-                </button>
             </div>
         `;
         return result;
