@@ -257,10 +257,6 @@ async function submitServerAccess() {
         <p>ZeroTier ID: <b>${zerotierId}</b></p>
         <p>Please review and approve or reject the request.</p>
     `));
-    await postActivity(userData.uid, {
-        type: 'Server Access',
-        message: `You requested server access with ZeroTier ID: ${zerotierId} on ${formatDate(new Date())}.`,
-    });
     closeModal();
 }
 
