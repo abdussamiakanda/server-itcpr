@@ -200,45 +200,89 @@ function plotTimeline(rows) {
     const timelineWrapper = document.createElement('div');
     timelineWrapper.className = 'timeline-wrapper';
 
-    const minTime = Math.min(...rows.map(r => r.t_in.toMillis()));
-    const maxTime = Math.max(...rows.map(r => r.t_out.toMillis()));
-    const totalSpan = maxTime - minTime;
-
     const section = document.createElement('div');
     section.className = 'section';
-    section.innerHTML = `<div class="section-header"><h3>User Session Timeline</h3></div>`;
+    section.innerHTML = `
+        <div class="section-header">
+            <h3>User Session Timeline</h3>
+            <div class="timeline-filters">
+                <select id="timeRangeFilter" onchange="updateTimeline()">
+                    <option value="day">Last 24 Hours</option>
+                    <option value="week">Last 7 Days</option>
+                    <option value="month">Last 30 Days</option>
+                    <option value="all" selected>All Time</option>
+                </select>
+            </div>
+        </div>
+    `;
     section.appendChild(timelineWrapper);
     document.getElementById('dashboardContent').appendChild(section);
 
-    users.forEach(user => {
-        const row = document.createElement('div');
-        row.className = 'timeline-row';
+    function renderTimeline(filteredRows) {
+        timelineWrapper.innerHTML = '';
+        const minTime = Math.min(...filteredRows.map(r => r.t_in.toMillis()));
+        const maxTime = Math.max(...filteredRows.map(r => r.t_out.toMillis()));
+        const totalSpan = maxTime - minTime;
 
-        const label = document.createElement('div');
-        label.className = 'timeline-label';
-        label.textContent = user;
-        row.appendChild(label);
+        users.forEach(user => {
+            const row = document.createElement('div');
+            row.className = 'timeline-row';
 
-        const track = document.createElement('div');
-        track.className = 'timeline-track';
+            const label = document.createElement('div');
+            label.className = 'timeline-label';
+            label.textContent = user;
+            row.appendChild(label);
 
-        rows.filter(r => r.user === user).forEach(session => {
-            const start = session.t_in.toMillis();
-            const end = session.t_out.toMillis();
-            const leftPercent = ((start - minTime) / totalSpan) * 100;
-            const widthPercent = ((end - start) / totalSpan) * 100;
+            const track = document.createElement('div');
+            track.className = 'timeline-track';
 
-            const bar = document.createElement('div');
-            bar.className = 'timeline-bar animate-bar';
-            bar.style.left = `${leftPercent}%`;
-            bar.style.width = `${widthPercent}%`;
-            bar.title = `${session.t_in.toFormat('dd MMM yyyy, hh:mm a')} - ${session.t_out.toFormat('dd MMM yyyy, hh:mm a')}`;
-            track.appendChild(bar);
+            filteredRows.filter(r => r.user === user).forEach(session => {
+                const start = session.t_in.toMillis();
+                const end = session.t_out.toMillis();
+                const leftPercent = ((start - minTime) / totalSpan) * 100;
+                const widthPercent = ((end - start) / totalSpan) * 100;
+
+                const bar = document.createElement('div');
+                bar.className = 'timeline-bar animate-bar';
+                bar.style.left = `${leftPercent}%`;
+                bar.style.width = `${widthPercent}%`;
+                bar.title = `${session.t_in.toFormat('dd MMM yyyy, hh:mm a')} - ${session.t_out.toFormat('dd MMM yyyy, hh:mm a')}`;
+                track.appendChild(bar);
+            });
+
+            row.appendChild(track);
+            timelineWrapper.appendChild(row);
         });
+    }
 
-        row.appendChild(track);
-        timelineWrapper.appendChild(row);
-    });
+    // Initial render with all data
+    renderTimeline(rows);
+
+    // Add the updateTimeline function to the window object
+    window.updateTimeline = function() {
+        const filter = document.getElementById('timeRangeFilter').value;
+        const now = luxon.DateTime.now();
+        let filteredRows;
+
+        switch(filter) {
+            case 'day':
+                const dayAgo = now.minus({ days: 1 });
+                filteredRows = rows.filter(r => r.t_in >= dayAgo);
+                break;
+            case 'week':
+                const weekAgo = now.minus({ weeks: 1 });
+                filteredRows = rows.filter(r => r.t_in >= weekAgo);
+                break;
+            case 'month':
+                const monthAgo = now.minus({ months: 1 });
+                filteredRows = rows.filter(r => r.t_in >= monthAgo);
+                break;
+            default:
+                filteredRows = rows;
+        }
+
+        renderTimeline(filteredRows);
+    };
 }
 
 function plotUsageByDay(usageByDay) {
