@@ -1,19 +1,19 @@
 .section-header input {
-    background-color: #111;
-    color: #ddd;
-    border: 1px solid #444;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 6px 10px;
     font-size: 0.95rem;
 }
 
 .section-header input:focus {
-    border-color: #00c4cc;
+    border-color: #2563eb;
     outline: none;
 }
 
 .section-header input::placeholder {
-    color: #aaa;
+    color: #9ca3af;
 }
 
 .windows-software-list ul {
@@ -34,7 +34,7 @@
     position: absolute;
     left: 0;
     margin-right: 5px;
-    color: #00c4cc;
+    color: #2563eb;
     font-size: 1rem;
 }
 
@@ -56,8 +56,6 @@
     position: absolute;
     left: 0;
     margin-right: 5px;
-    color: #00c4cc;
+    color: #2563eb;
     font-size: 1rem;
 }
-
-

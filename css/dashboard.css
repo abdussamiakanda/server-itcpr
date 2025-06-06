@@ -7,18 +7,20 @@
 }
 
 .stat-card {
-    background-color: #1b1b1b;
+    background-color: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
     width: 300px;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
 }
 
 .stat-card-full {
-    background-color: #1b1b1b;
+    background-color: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
 }
 
 .stat-card-full p {
@@ -37,32 +39,34 @@
 }
 
 .stat-icon {
-    color: #00c4cc;
+    color: #2563eb;
     font-size: 1.5rem;
 }
 
 .stat-title {
-    color: #00c4cc;
+    color: #2563eb;
     font-size: 1.1rem;
 }
 
 .stat-value {
     font-size: 2rem;
     margin-bottom: 0.5rem;
+    color: #1f2937;
 }
 
 .stat-info {
-    color: #aaa;
+    color: #6b7280;
     font-size: 0.95rem;
 }
 
 /* Section Block */
 .section {
-    background-color: #1a1a1a;
+    background-color: #ffffff;
     border-radius: 12px;
     padding: 1.5rem;
     width: 100%;
     max-width: 1100px;
+    border: 1px solid #e0e0e0;
 }
 
 .section-header {
@@ -74,7 +78,7 @@
 
 .section-header h3 {
     font-size: 1.4rem;
-    color: #00c4cc;
+    color: #2563eb;
 }
 
 .btn {
@@ -95,25 +99,35 @@
 
 .btn-outline {
     background-color: transparent;
-    border: 1px solid #00c4ccd6;
-    color: #ddd;
-
+    border: 1px solid #2563eb;
+    color: #4b5563;
 }
 
 .btn-outline:hover {
-    background-color: #00c5cc9b;
+    background-color: #eff6ff;
+    color: #2563eb;
 }
 
 .btn-success {
-    background-color: #111;
-    color: #ddd;
-    border: 1px solid #28a7469a;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #10b981;
+}
+
+.btn-success:hover {
+    background-color: #ecfdf5;
+    color: #059669;
 }
 
 .btn-danger {
-    background-color: #111;
-    color: #ddd;
-    border: 1px solid #dc3546a3;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #ef4444;
+}
+
+.btn-danger:hover {
+    background-color: #fef2f2;
+    color: #dc2626;
 }
 
 .btn-sm {
@@ -131,16 +145,16 @@
 .server-users-table td {
     padding: 0.75rem;
     text-align: left;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #c1c1c1;
 }
 
 .server-users-table th {
-    color: #00c4cc;
-    background-color: #1c1c1c;
+    color: #2563eb;
+    background-color: #f8fafc;
 }
 
 .server-users-table td {
-    color: #ddd;
+    color: #4b5563;
 }
 
 .server-request-list {
@@ -150,7 +164,7 @@
 }
 
 .server-user-card {
-    background-color: #222;
+    background-color: #ffffff;
     border-radius: 8px;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -158,10 +172,12 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+    border: 1px solid #e0e0e0;
 }
 
 .server-user-header {
     font-size: 1rem;
+    color: #1f2937;
 }
 
 .server-user-actions {
@@ -180,21 +196,22 @@
 }
 
 .resilio-user-card {
-    background-color: #222;
+    background-color: #ffffff;
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    border: 1px solid #e0e0e0;
 }
 
 .resilio-user-card:hover {
-    background-color: #333;
+    background-color: #f8fafc;
 }
 
 .resilio-user-card .name {
-    color: #00c4cc;
+    color: #2563eb;
     padding: 0.5rem 1rem;
-    border-right: 1px solid #444;
+    border-right: 1px solid #e0e0e0;
 }
 
 .resilio-user-card .link {
@@ -205,13 +222,13 @@
 
 .resilio-user-card .spacer {
     padding: 1.3rem 0.5rem;
-    border-right: 1px solid #444;
+    border-right: 1px solid #e0e0e0;
 }
 
 .resilio-user-card .delete,
 .resilio-user-card .copy {
     cursor: pointer;
-    color: #00c4cc;
+    color: #2563eb;
     padding: 0.75rem 1rem;
     transition: transform 0.2s;
 }
@@ -230,24 +247,24 @@
 
 .resilio-user-card .delete:hover,
 .resilio-user-card .copy:hover {
-    background-color: #00c5cc41;
+    background-color: #eff6ff;
 }
 
 .server_guide {
-    color: #66d9ef;
+    color: #2563eb;
     text-decoration: underline;
     cursor: pointer;
 }
 
 .server_guide:hover {
-    color: #00c4cc;
+    color: #1d4ed8;
 }
 
 .server-code {
-    background-color: #1b1b1b;
-    color: #ddd;
+    background-color: #f8fafc;
+    color: #4b5563;
     padding: 0.2rem 1rem;
-    border: 1px solid #333;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     font-family: monospace;
     font-size: 1.3rem;
@@ -257,8 +274,9 @@
 }
 
 .server-code .material-icons {
+    color: #2563eb;
     font-size: 1.2rem;
-    color: #00c4cc;
+    cursor: pointer;
 }
 
 .server-access ul {
@@ -268,7 +286,7 @@
 }
 
 .server-access ul li {
-    background-color: #222;
+    background-color: #f2f2f2;
     border-radius: 8px;
     padding: 0.5rem 1rem;
     margin-bottom: 0.5rem;
@@ -278,11 +296,10 @@
 }
 
 .server-control .description {
-    color: #d8d8d8;
-    font-size: 0.95rem;
+    color: #6b7280;
     margin-bottom: 1rem;
+    font-size: 0.95rem;
 }
-
 
 /* Modal Base */
 .modal {
@@ -290,9 +307,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.95);
-    background-color: #1b1b1b;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 1001;
     width: 100%;
     max-width: 600px;
@@ -313,7 +330,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -329,26 +346,26 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
     padding-bottom: 0.5rem;
 }
 
 .modal-header h3 {
     font-size: 1.3rem;
-    color: #00c4cc;
+    color: #2563eb;
 }
 
 .btn-close {
     background: none;
     border: none;
     font-size: 1.5rem;
-    color: #888;
+    color: #6b7280;
     cursor: pointer;
     transition: color 0.2s;
 }
 
 .btn-close:hover {
-    color: #fff;
+    color: #4b5563;
 }
 
 .modal-body {
@@ -362,7 +379,7 @@
 .form-group label {
     display: block;
     margin-bottom: 0.4rem;
-    color: #aaa;
+    color: #4b5563;
     font-size: 0.95rem;
 }
 
@@ -370,15 +387,15 @@
     width: 100%;
     padding: 0.5rem 0.75rem;
     border-radius: 5px;
-    border: 1px solid #444;
-    background-color: #111;
-    color: #ddd;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    color: #4b5563;
     font-size: 1rem;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: #00c4cc;
+    border-color: #2563eb;
 }
 
 /* Modal Footer */
@@ -390,15 +407,15 @@
 
 /* Primary Button */
 .btn-primary {
-    background-color: #00c4cc;
-    color: #111;
+    background-color: #2563eb;
+    color: white;
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.5rem 1rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.2s;
 }
 
 .btn-primary:hover {
-    background-color: #009ba1;
+    background-color: #1d4ed8;
 }

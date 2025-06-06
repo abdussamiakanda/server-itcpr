@@ -6,26 +6,26 @@
 }
 
 .user-summary {
-    background-color: #1a1a1a;
+    background-color: #ffffff;
     padding: 1.2rem;
     border-radius: 10px;
-    border: 1px solid #333;
+    border: 1px solid #e0e0e0;
     white-space: nowrap;
 }
 
 .user-summary h4 {
-    color: #00c4cc;
+    color: #2563eb;
     margin-bottom: 0.5rem;
 }
 
 .user-summary p {
     margin: 0.2rem 0;
     font-size: 0.95rem;
-    color: #ccc;
+    color: #4b5563;
 }
 
 canvas {
-    background-color: #111;
+    background-color: #ffffff;
     padding: 1rem;
     border-radius: 10px;
 }
@@ -41,21 +41,20 @@ canvas {
 .bar-label {
     width: 150px;
     flex-shrink: 0;
-    color: #ddd;
+    color: #4b5563;
     font-size: 0.9rem;
 }
 
 .bar-track {
     flex-grow: 1;
-    background-color: #222;
+    background-color: #f1f5f9;
     height: 20px;
     border-radius: 6px;
-    /* overflow: hidden; */
     position: relative;
 }
 
 .bar-fill {
-    background-color: #00c4cc;
+    background-color: #1c4398;
     height: 100%;
     display: flex;
     align-items: center;
@@ -64,14 +63,14 @@ canvas {
     position: relative;
     font-size: 0.85rem;
     font-weight: bold;
-    color: #111;
+    color: #ffffff;
     border-radius: 6px;
     white-space: nowrap;
 }
 
 .bar-value {
-    color: #fff;
-    mix-blend-mode: difference; /* Makes text adapt to background brightness */
+    color: #ffffff;
+    mix-blend-mode: difference;
     position: absolute;
     left: 50%;
     top: 0;
@@ -104,13 +103,14 @@ canvas {
     width: 150px;
     font-size: 0.9rem;
     flex-shrink: 0;
+    color: #4b5563;
 }
 
 .timeline-track {
     position: relative;
     flex-grow: 1;
     height: 24px;
-    background-color: #222;
+    background-color: #f1f5f9;
     border-radius: 4px;
     overflow: hidden;
 }
@@ -118,7 +118,7 @@ canvas {
 .timeline-bar {
     position: absolute;
     height: 100%;
-    background-color: #00c4cc;
+    background-color: #1c4398;
     border-radius: 4px;
     opacity: 0.85;
     cursor: pointer;
@@ -138,9 +138,9 @@ canvas {
 }
 
 .timeline-filters select {
-    background-color: #1a1a1a;
-    color: #fff;
-    border: 1px solid #333;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #e0e0e0;
     padding: 0.5rem;
     border-radius: 6px;
     font-size: 0.9rem;
@@ -149,14 +149,14 @@ canvas {
 }
 
 .timeline-filters select:hover {
-    border-color: #00c4cc;
-    background-color: #222;
+    border-color: #2563eb;
+    background-color: #f8fafc;
 }
 
 .timeline-filters select:focus {
     outline: none;
-    border-color: #00c4cc;
-    box-shadow: 0 0 0 2px rgba(0, 196, 204, 0.2);
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
 .section-header {
@@ -168,5 +168,5 @@ canvas {
 
 .section-header h3 {
     margin: 0;
-    color: #00c4cc;
+    color: #2563eb;
 }

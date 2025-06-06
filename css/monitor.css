@@ -1,19 +1,19 @@
 .section-header input {
-    background-color: #111;
-    color: #ddd;
-    border: 1px solid #444;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 6px 10px;
     font-size: 0.95rem;
 }
 
 .section-header input:focus {
-    border-color: #00c4cc;
+    border-color: #2563eb;
     outline: none;
 }
 
 .section-header input::placeholder {
-    color: #aaa;
+    color: #9ca3af;
 }
 
 /* WSL Commands Section */
@@ -34,15 +34,15 @@
 }
 
 .filter-group label {
-    color: #aaa;
+    color: #6b7280;
     font-size: 0.9rem;
 }
 
 .filter-group select,
 .filter-group input[type="date"] {
-    background-color: #111;
-    color: #ddd;
-    border: 1px solid #444;
+    background-color: #ffffff;
+    color: #4b5563;
+    border: 1px solid #e0e0e0;
     border-radius: 5px;
     padding: 6px 10px;
     font-size: 0.95rem;
@@ -50,7 +50,7 @@
 
 .filter-group select:focus,
 .filter-group input[type="date"]:focus {
-    border-color: #00c4cc;
+    border-color: #2563eb;
     outline: none;
 }
 
@@ -59,43 +59,43 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
-    background-color: #1b1b1b;
+    background-color: #ffffff;
     border-radius: 10px;
     overflow: hidden;
 }
 
 .wsl-log-table thead {
-    background-color: #222;
+    background-color: #f8fafc;
 }
 
 .wsl-log-table thead th {
     padding: 12px 10px;
     text-align: left;
-    color: #00c4cc;
+    color: #2563eb;
     font-weight: bold;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #e0e0e0;
     white-space: nowrap;
 }
 
 .wsl-log-table tbody td {
     padding: 10px;
-    border-bottom: 1px solid #333;
-    color: #ddd;
+    border-bottom: 1px solid #e0e0e0;
+    color: #4b5563;
     white-space: nowrap;
 }
 
 .wsl-log-table tbody tr:hover {
-    background-color: #2a2a2a;
+    background-color: #f8fafc;
 }
 
 /* Highlight sudo commands */
 .wsl-log-table tbody tr.sudo-command {
-    background-color: #331111;
-    border-left: 5px solid #dc3545;
+    background-color: #fef2f2;
+    border-left: 5px solid #dc2626;
 }
 
 .wsl-log-table tbody tr.sudo-command:hover {
-    background-color: #441414;
+    background-color: #fee2e2;
 }
 
 .wsl-log-table tbody tr td:last-child {
@@ -105,10 +105,10 @@
 
 /* Error message */
 .error-message {
-    color: #dc3545;
+    color: #dc2626;
     text-align: center;
     padding: 1rem;
-    background-color: #220000;
+    background-color: #fef2f2;
     border-radius: 8px;
 }
 
@@ -133,7 +133,7 @@
 
     .wsl-log-table tr {
         margin-bottom: 1rem;
-        background-color: #222;
+        background-color: #ffffff;
         border-radius: 8px;
     }
 
@@ -150,6 +150,6 @@
         width: 45%;
         text-align: left;
         font-weight: bold;
-        color: #00c4cc;
+        color: #2563eb;
     }
 }
