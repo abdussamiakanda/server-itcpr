@@ -33,6 +33,8 @@ header {
     padding: 10px;
     background-color: #ffffff;
     z-index: 1000;
+    border-radius: 0 0 10px 10px;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 h1 {
