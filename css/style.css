@@ -61,13 +61,18 @@ nav div {
     border-radius: 5px;
     transition: all 0.3s ease;
     cursor: pointer;
-    color: #4b5563;
+    color: #2563eb;
 }
 
 nav div:hover {
     background-color: #f8fafc;
     transform: translateY(-2px);
     border-color: #2563eb;
+    color: #4b5563;
+}
+
+nav div:hover span.material-icons {
+    color: #4b5563;
 }
 
 nav div.selected {
