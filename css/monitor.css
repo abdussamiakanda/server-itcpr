@@ -8,7 +8,7 @@
 }
 
 .section-header input:focus {
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     outline: none;
 }
 
@@ -50,7 +50,7 @@
 
 .filter-group select:focus,
 .filter-group input[type="date"]:focus {
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     outline: none;
 }
 
@@ -71,7 +71,7 @@
 .wsl-log-table thead th {
     padding: 12px 10px;
     text-align: left;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-weight: bold;
     border-bottom: 1px solid #e0e0e0;
     white-space: nowrap;
@@ -150,6 +150,6 @@
         width: 45%;
         text-align: left;
         font-weight: bold;
-        color: #2563eb;
+        color: rgb(157, 157, 189);
     }
 }

@@ -8,7 +8,7 @@
 }
 
 .section-header input:focus {
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     outline: none;
 }
 
@@ -34,7 +34,7 @@
     position: absolute;
     left: 0;
     margin-right: 5px;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1rem;
 }
 
@@ -56,6 +56,6 @@
     position: absolute;
     left: 0;
     margin-right: 5px;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1rem;
 }

@@ -39,12 +39,12 @@ header {
 
 h1 {
     font-size: 2rem;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     cursor: pointer;
 }
 
 h1:hover {
-    color: #1d4ed8;
+    color: rgb(157, 157, 189);
 }
 
 nav {
@@ -63,13 +63,13 @@ nav div {
     border-radius: 5px;
     transition: all 0.3s ease;
     cursor: pointer;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }
 
 nav div:hover {
     background-color: #f8fafc;
     transform: translateY(-2px);
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     color: #4b5563;
 }
 
@@ -79,12 +79,12 @@ nav div:hover span.material-icons {
 
 nav div.selected {
     background-color: #eff6ff;
-    border-color: #2563eb;
-    color: #2563eb;
+    border-color: rgb(157, 157, 189);
+    color: rgb(157, 157, 189);
 }
 
 nav div span.material-icons {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -148,8 +148,8 @@ main {
 }
 
 h2 {
-    color: #2563eb;
-    border-left: 4px solid #2563eb;
+    color: rgb(157, 157, 189);
+    border-left: 4px solid rgb(157, 157, 189);
     padding-left: 10px;
     margin-bottom: 1rem;
     font-size: 1.5rem;
@@ -217,7 +217,7 @@ h2 {
     position: absolute;
     left: 0;
     margin-right: 5px;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1rem;
 }
 
@@ -238,12 +238,12 @@ h2 {
 }
 
 .specs-grid div strong {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }
 
 /* Contact */
 .contact .email {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-weight: bold;
     text-decoration: none;
 }
@@ -266,7 +266,7 @@ footer {
 }
 
 #loginButton, #logoutButton {
-    background-color: #2563eb;
+    background-color: rgb(157, 157, 189);
     color: white;
     border: none;
     padding: 10px 20px;
@@ -277,7 +277,7 @@ footer {
 }
 
 #loginButton:hover, #logoutButton:hover {
-    background-color: #1d4ed8;
+    background-color: rgb(157, 157, 189);
 }
 
 #userInfo {

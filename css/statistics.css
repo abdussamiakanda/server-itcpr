@@ -14,7 +14,7 @@
 }
 
 .user-summary h4 {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     margin-bottom: 0.5rem;
 }
 
@@ -54,7 +54,7 @@ canvas {
 }
 
 .bar-fill {
-    background-color: #1c4398;
+    background-color: rgb(157, 157, 189);
     height: 100%;
     display: flex;
     align-items: center;
@@ -118,7 +118,7 @@ canvas {
 .timeline-bar {
     position: absolute;
     height: 100%;
-    background-color: #1c4398;
+    background-color: rgb(157, 157, 189);
     border-radius: 4px;
     opacity: 0.85;
     cursor: pointer;
@@ -149,13 +149,13 @@ canvas {
 }
 
 .timeline-filters select:hover {
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     background-color: #f8fafc;
 }
 
 .timeline-filters select:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
     box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
 }
 
@@ -168,5 +168,5 @@ canvas {
 
 .section-header h3 {
     margin: 0;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }

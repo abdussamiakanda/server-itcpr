@@ -39,12 +39,12 @@
 }
 
 .stat-icon {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1.5rem;
 }
 
 .stat-title {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1.1rem;
 }
 
@@ -78,7 +78,7 @@
 
 .section-header h3 {
     font-size: 1.4rem;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }
 
 .btn {
@@ -99,13 +99,13 @@
 
 .btn-outline {
     background-color: transparent;
-    border: 1px solid #2563eb;
+    border: 1px solid rgb(157, 157, 189);
     color: #4b5563;
 }
 
 .btn-outline:hover {
     background-color: #eff6ff;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }
 
 .btn-success {
@@ -149,7 +149,7 @@
 }
 
 .server-users-table th {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     background-color: #f8fafc;
 }
 
@@ -209,7 +209,7 @@
 }
 
 .resilio-user-card .name {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     padding: 0.5rem 1rem;
     border-right: 1px solid #e0e0e0;
 }
@@ -228,7 +228,7 @@
 .resilio-user-card .delete,
 .resilio-user-card .copy {
     cursor: pointer;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     padding: 0.75rem 1rem;
     transition: transform 0.2s;
 }
@@ -251,13 +251,13 @@
 }
 
 .server_guide {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     text-decoration: underline;
     cursor: pointer;
 }
 
 .server_guide:hover {
-    color: #1d4ed8;
+    color: rgb(157, 157, 189);
 }
 
 .server-code {
@@ -274,7 +274,7 @@
 }
 
 .server-code .material-icons {
-    color: #2563eb;
+    color: rgb(157, 157, 189);
     font-size: 1.2rem;
     cursor: pointer;
 }
@@ -352,7 +352,7 @@
 
 .modal-header h3 {
     font-size: 1.3rem;
-    color: #2563eb;
+    color: rgb(157, 157, 189);
 }
 
 .btn-close {
@@ -395,7 +395,7 @@
 
 .form-control:focus {
     outline: none;
-    border-color: #2563eb;
+    border-color: rgb(157, 157, 189);
 }
 
 /* Modal Footer */
@@ -407,7 +407,7 @@
 
 /* Primary Button */
 .btn-primary {
-    background-color: #2563eb;
+    background-color: rgb(157, 157, 189);
     color: white;
     border: none;
     padding: 0.5rem 1rem;
@@ -417,5 +417,5 @@
 }
 
 .btn-primary:hover {
-    background-color: #1d4ed8;
+    background-color: rgb(157, 157, 189);
 }
