@@ -1,13 +1,13 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { checkAuthState } from "./auth.js";
 
 document.getElementById('year').textContent = new Date().getFullYear();
 
 async function signInWithGoogle() {
     try {
-        await signInWithPopup(getAuth(), new GoogleAuthProvider());
+        // Use the SSO system instead of direct Google authentication
+        await window.signInWithGoogle();
     } catch (error) {
-        console.error('Error signing in with Google:', error);
+        console.error('Error signing in with SSO:', error);
     }
 }
 
@@ -17,15 +17,21 @@ window.goToPage = function(page) {
 
 addEventListener('DOMContentLoaded', async () => {
     const loginBtn = document.getElementById('loginBtn');
+    
+    // Check initial auth state
+    const initialUser = await checkAuthState();
+    if (initialUser) {
+        // User is already logged in, redirect to dashboard
+        window.location.href = '/dashboard';
+        return;
+    }
+    
     loginBtn.addEventListener('click', async () => {
-        const user = await checkAuthState();
-        if (user) {
-            window.location.href = '/dashboard';
-        } else {
+        try {
             await signInWithGoogle();
-            if (await checkAuthState()) {
-                window.location.href = '/dashboard';
-            }
+            // The SSO system will handle the redirect after successful authentication
+        } catch (error) {
+            console.error('Login failed:', error);
         }
     });
 });
