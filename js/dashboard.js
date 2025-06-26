@@ -145,7 +145,7 @@ async function fetchServerData() {
 
         const diffInMinutes = now.diff(parsedTime, "minutes").toObject().minutes;
 
-        if (diffInMinutes > 2) {
+        if (diffInMinutes > 2 && userData.zerotierId) {
             overviewContainer.innerHTML = `
                 <div class="stat-card-full">
                     <p class="description">
