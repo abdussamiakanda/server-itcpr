@@ -15,6 +15,7 @@ window.updateAccess = updateAccess;
 
 let userData = null;
 let wslServerUsers = {};
+let isServerOnline = false;
 
 async function showDashboard() {
     const navbar = document.getElementById('navbar');
@@ -140,12 +141,20 @@ async function fetchServerData() {
         const hours = serverData.uptime.hours % 24;
 
         const overviewContainer = document.getElementById('overviewContainer');
-        const parsedTime = luxon.DateTime.fromFormat(serverData.last_updated, "hh:mm a; LLL dd, yyyy", { zone: "America/Chicago" }).setZone(luxon.DateTime.local().zoneName);
+        let parsedTime = null;
+        if (luxon.DateTime.local().zoneName !== 'America/Chicago') {
+            parsedTime = luxon.DateTime.fromFormat(serverData.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" }).setZone(luxon.DateTime.local().zoneName);
+        } else {
+            parsedTime = luxon.DateTime.fromFormat(serverData.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" });
+        }
         const now = luxon.DateTime.local();
 
         const diffInMinutes = now.diff(parsedTime, "minutes").toObject().minutes;
 
-        if (diffInMinutes > 2 && userData.zerotierId) {
+        console.log(serverData.last_updated);
+
+        if (diffInMinutes > 5 && userData.zerotierId) {
+            isServerOnline = false;
             overviewContainer.innerHTML = `
                 <div class="stat-card-full">
                     <p class="description">
@@ -158,7 +167,17 @@ async function fetchServerData() {
                     </button>
                 </div>
             `;
+        } else if (diffInMinutes > 5 && !userData.zerotierId) {
+            isServerOnline = false;
+            overviewContainer.innerHTML = `
+                <div class="stat-card-full">
+                    <p class="description">
+                        The server is currently powered off.
+                    </p>
+                </div>
+            `;
         } else {
+            isServerOnline = true;
             overviewContainer.innerHTML = `
             <div class="stat-card">
                 <div class="stat-header">
@@ -296,7 +315,7 @@ async function getServerUsers(activeConnections) {
             const userIps = user.ip.split(';');
             const isConnected = userIps.some(ip => activeIps.has(ip));
 
-            if (isConnected) {
+            if (isConnected && isServerOnline) {
                 const connectedIp = userIps.find(ip => activeIps.has(ip));
                 const conn = activeConnections[connectedIp];
                 connectedUsers +=`
