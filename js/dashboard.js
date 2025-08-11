@@ -153,7 +153,7 @@ async function fetchServerData() {
 
         console.log(serverData.last_updated);
 
-        if (diffInMinutes > 5 && userData.zerotierId) {
+        if (diffInMinutes > 2 && userData.zerotierId) {
             isServerOnline = false;
             overviewContainer.innerHTML = `
                 <div class="stat-card-full">
@@ -167,7 +167,7 @@ async function fetchServerData() {
                     </button>
                 </div>
             `;
-        } else if (diffInMinutes > 5 && !userData.zerotierId) {
+        } else if (diffInMinutes > 2 && !userData.zerotierId) {
             isServerOnline = false;
             overviewContainer.innerHTML = `
                 <div class="stat-card-full">
