@@ -159,12 +159,8 @@ async function fetchServerData() {
                 <div class="stat-card-full">
                     <p class="description">
                         The server is currently powered off.
-                        Use the button below to remotely power on the server via ESP32-based Wake-on-LAN.
-                        This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+                        Contact us to power it on.
                     </p>
-                    <button class="btn btn-outline" onclick="sendWakeCommand()" id="wakeBtn">
-                        Turn On Server
-                    </button>
                 </div>
             `;
         } else if (diffInMinutes > 2 && !userData.zerotierId) {
@@ -793,39 +789,40 @@ async function getServerRequests() {
     return requestsHtml;
 }
 
-window.sendWakeCommand = async function () {
-    try {
-        const response = await fetch('https://api.itcpr.org/server/wake', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: userData.name })
-        });
+// window.sendWakeCommand = async function () {
+//     console.log('Sending wake command...');
+//     try {
+//         const response = await fetch('https://api.itcpr.org/server/wake', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ username: userData.name })
+//         });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`Server responded with ${response.status}: ${errorText}`);
-        }
+//         if (!response.ok) {
+//             const errorText = await response.text();
+//             throw new Error(`Server responded with ${response.status}: ${errorText}`);
+//         }
 
-        const result = await response.text();
-        console.log(result);
-        const overviewContainer = document.getElementById('overviewContainer');
-        overviewContainer.innerHTML = `
-            <div class="stat-card-full">
-                <p class="description">
-                    Server wake command sent successfully.
-                    Use the button below to remotely power off the server via ESP32-based Wake-on-LAN.
-                    This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
-                </p>
-            </div>
-        `;
-        return result;
-    } catch (error) {
-        console.error('Error sending wake command:', error);
-        return null;
-    }
-}
+//         const result = await response.text();
+//         console.log(result);
+//         const overviewContainer = document.getElementById('overviewContainer');
+//         overviewContainer.innerHTML = `
+//             <div class="stat-card-full">
+//                 <p class="description">
+//                     Server wake command sent successfully.
+//                     Use the button below to remotely power off the server via ESP32-based Wake-on-LAN.
+//                     This works only if the ESP32 device is online and connected to the server network. So, it may work most of the time.
+//                 </p>
+//             </div>
+//         `;
+//         return result;
+//     } catch (error) {
+//         console.error('Error sending wake command:', error);
+//         return null;
+//     }
+// }
 
 function convertToLocalTime(input, gmtOffset='GMT-6') {
     const inputWithOffset = `${input} ${gmtOffset}`;
