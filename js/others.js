@@ -20,7 +20,7 @@ let isServerOnline = false;
 async function showDashboard() {
     const navbar = document.getElementById('navbar');
     navbar.innerHTML = `
-        <div class="selected">
+        <div onclick="goToPage('dashboard')">
             <span class="material-icons">home</span>
             Dashboard
         </div>
@@ -36,7 +36,7 @@ async function showDashboard() {
             <span class="material-icons">history</span>
             Changelog
         </div>
-        <div onclick="goToPage('others')">
+        <div class="selected">
             <span class="material-icons">expand_circle_down</span>
             Others
         </div>
@@ -52,52 +52,28 @@ async function showDashboard() {
         window.location.href = '/';
     });
 
-    await getWSLServersUsers();
+    // await getWSLServersUsers();
 
     const dashboardContent = document.getElementById('dashboardContent');
     dashboardContent.innerHTML = `
         <div class="section">
             <div class="section-header">
-                <h3>Alpha Server Info</h3>
+                <h3>Beta Server Info</h3>
             </div>
             <div class="overview-container" id="overviewContainer"></div>
-        </div>
-
-        <!-- Active Connections -->
-        <div class="section">
-            <div class="section-header">
-                <h3>Server Access</h3>
-                ${ userData.serverCode ? `` : `
-                    <button class="btn btn-outline" onclick="loadServerAccessModal()">
-                        Request Access
-                    </button>
-                `}
+            <div class="section-content">
+                <p>
+                    The Beta server is owned by Dr. Torikul Islam and maintained by ITCPR
+                    for technical support and administration. Access is granted exclusively
+                    to Dr. Islam's direct students, who may also use ITCPR's primary server
+                    when required.
+                </p>
             </div>
-            <div class="server-access">
-                ${ userData.serverCode ? `
-                    You have access to the server with the following credentials:
-                    <ul>
-                        <li><b>Access Code:</b> ${userData.serverCode}</li>
-                        <li><b>IP Address:</b> ${userData.ip.replaceAll(';',', ')}</li>
-                        <li><b>SSH Folder Name:</b> /mnt/c/Users/info/Research/${userData.ssh_folder}</li>
-                    </ul>
-                    ` : `
-                    You do not have access to the server. Please request access here.
-                `}
-            </div>
-        </div>
-
-        <!-- Active Connections -->
-        <div class="section">
-            <div class="section-header">
-                <h3>Active Connections</h3>
-            </div>
-            <div class="server-users-list" id="server-users-list"></div>
         </div>
 
         <!-- Resilio Sync -->
         ${userData.type === 'admin' || userData.resilio ? `
-            <div class="section">
+            <div class="section" style="display: none;">
                 <div class="section-header">
                     <h3>Resilio Sync</h3>
                     ${ userData.type === 'admin' ? `
@@ -117,17 +93,6 @@ async function showDashboard() {
             </div>
         ` : ''}
 
-        <!-- Pending Connections -->
-        ${userData.type === 'admin' ? `
-        <div class="section">
-            <div class="section-header">
-                <h3>Connections Requests</h3>
-            </div>
-            <div class="server-request-list">
-                ${await getServerRequests()}
-            </div>
-        </div>
-        ` : ''}
         <br>
     `;
 
@@ -139,8 +104,7 @@ async function showDashboard() {
 async function fetchServerData() {
     try {
         console.log('Fetching server data...');
-        const response = await fetch('https://api.itcpr.org/server/stats');
-        
+        const response = await fetch('https://api.itcpr.org/server/stats-beta');
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
@@ -201,7 +165,7 @@ async function fetchServerData() {
             `;
         }
 
-        await getServerUsers(serverData.active_connections);
+        // await getServerUsers(serverData.active_connections);
     } catch (error) {
         console.error('Error loading server content:', error);
         elements.contentArea.innerHTML = `<p class="error-message">Error loading server details.</p>`;

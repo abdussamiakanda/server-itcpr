@@ -18,6 +18,10 @@ async function showStatistics() {
         <div onclick="goToPage('changelog')">
             <span class="material-icons">history</span> Changelog
         </div>
+        <div onclick="goToPage('others')">
+            <span class="material-icons">expand_circle_down</span>
+            Others
+        </div>
         <div id="logoutBtn">
             <span class="material-icons">logout</span> Logout
         </div>

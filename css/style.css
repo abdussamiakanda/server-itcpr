@@ -49,7 +49,7 @@ h1:hover {
 
 nav {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
 }
 
 nav div {
