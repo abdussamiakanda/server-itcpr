@@ -63,9 +63,9 @@ async function showDashboard() {
             <div class="overview-container" id="overviewContainer"></div>
             <div class="section-content">
                 <p>
-                    The Beta server is owned by Dr. Torikul Islam and maintained by ITCPR
+                    The Beta server is owned by Dr. Md Torikul Islam and maintained by ITCPR
                     for technical support and administration. Access is granted exclusively
-                    to Dr. Islam's direct students, who may also use ITCPR's primary server
+                    to Dr. Md Islam's direct students, who may also use ITCPR's primary server
                     when required.
                 </p>
             </div>
