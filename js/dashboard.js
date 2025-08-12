@@ -598,7 +598,7 @@ async function approveRequest(uid) {
                 <li>SSH Folder Name: ${ssh_folder}</li>
             </ul>
         </p>
-        <p>Please refer to the Guides section for detailed instructions on using the server. Access will be available within five minutes.</p>
+        <p>Please refer to the <a href="https://portal.itcpr.org/guide?id=LMZN67tXj7MzmAqjFbiP">Remote Server User Guide</a> for detailed instructions on using the server. Access will be available within a few minutes.</p>
     `));
     await authenticateZeroTierMember(user.data().zerotierId, ip, ssh_folder);
     await updateAccessCodeJson();
@@ -758,7 +758,7 @@ async function getServerRequests() {
     for (const user of users) {
         if (user.zerotierId && !user.ip) {
             requestsHtml += `
-                <div class="server-user-card">
+                <div class="server-user-card pending">
                     <div class="server-user-header">
                         <p>
                             ${user.name}<br>
