@@ -240,7 +240,7 @@ export async function loadServerAccessModal() {
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
-                    <button class="btn btn-primary" onclick="submitServerAccess()">Request Access</button>
+                    <button class="btn btn-primary" id="requestAccessBtn" onclick="submitServerAccess()">Request Access</button>
                 </div>
             </div>
         `;
@@ -249,6 +249,11 @@ export async function loadServerAccessModal() {
 }
 
 async function submitServerAccess() {
+    const requestAccessBtn = document.getElementById('requestAccessBtn');
+    requestAccessBtn.disabled = true;
+    requestAccessBtn.onclick = null;
+    requestAccessBtn.innerText = 'Requesting...';
+
     const zerotierId = document.getElementById('zerotierId').value;
     if (!zerotierId) {
         alert('Please enter your ZeroTier ID.');
@@ -270,6 +275,7 @@ async function submitServerAccess() {
         <p>Please review and approve or reject the request.</p>
     `));
     closeModal();
+    requestAccessBtn.innerText = 'Requested';
 }
 
 async function getWSLServersUsers() {
