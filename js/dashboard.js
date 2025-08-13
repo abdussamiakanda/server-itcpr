@@ -79,7 +79,7 @@ async function showDashboard() {
                     <ul>
                         <li><b>Access Code:</b> ${userData.serverCode}</li>
                         <li><b>IP Address:</b> ${userData.ip.replaceAll(';',', ')}</li>
-                        <li><b>SSH Folder Name:</b> /mnt/c/Users/info/Research/${userData.ssh_folder}</li>
+                        <li><b>SSH Folder Name:</b> ${window.innerWidth > 700 ? '/mnt/c/Users/info/Research/' + userData.ssh_folder : '.../Research/' + userData.ssh_folder}</li>
                     </ul>
                     ` : `
                     You do not have access to the server. Please request access here.

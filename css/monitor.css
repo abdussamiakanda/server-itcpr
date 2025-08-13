@@ -100,7 +100,7 @@
 
 .wsl-log-table tbody tr td:last-child {
     word-break: break-word;
-    white-space: break-spaces;
+    white-space: normal;
 }
 
 /* Error message */
@@ -115,8 +115,8 @@
 /* Responsive tweaks */
 @media (max-width: 700px) {
     .wsl-filters {
-        flex-direction: column;
         align-items: stretch;
+        gap: 1rem;
     }
 
     .wsl-log-table thead {
@@ -132,15 +132,18 @@
     }
 
     .wsl-log-table tr {
-        margin-bottom: 1rem;
-        background-color: #ffffff;
+        border: 1px solid #d8d6d6;
         border-radius: 8px;
+        margin-bottom: 0.5rem;
     }
 
     .wsl-log-table td {
-        text-align: right;
-        padding-left: 50%;
+        text-align: left;
         position: relative;
+    }
+
+    .wsl-log-table tbody tr td:last-child {
+        border-bottom: none;
     }
 
     .wsl-log-table td::before {
