@@ -139,7 +139,15 @@ async function showDashboard() {
 async function fetchServerData() {
     try {
         console.log('Fetching server data...');
-        const response = await fetch('https://api.itcpr.org/server/stats');
+        const response = await fetch('https://api.itcpr.org/server/stats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                file: 'server_stats.json'
+            })
+        });
         
         if (!response.ok) {
             throw new Error('Network response was not ok');
