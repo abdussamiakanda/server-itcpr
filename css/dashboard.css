@@ -305,6 +305,36 @@
     align-items: center;
 }
 
+.server-credentials {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 1rem;
+    max-width: 100%;
+}
+
+.server-credentials ul {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+.server-access .note {
+    color: #ff3535;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+.server-access .server-guide {
+    margin-top: 0.5rem;
+}
+
+@media (max-width: 700px) {
+    .server-credentials {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 0.5rem;
+    }
+}
+
 .server-control .description {
     color: #6b7280;
     margin-bottom: 1rem;
