@@ -149,12 +149,12 @@ async function fetchServerData() {
         let parsedTimeBeta = null;
         let parsedTimeGamma = null;
 
-        if (luxon.DateTime.local().zoneName !== 'America/Chicago') {
-            parsedTimeBeta = luxon.DateTime.fromFormat(serverDataBeta.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" }).setZone(luxon.DateTime.local().zoneName);
-            parsedTimeGamma = luxon.DateTime.fromFormat(serverDataGamma.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" }).setZone(luxon.DateTime.local().zoneName);
+        if (luxon.DateTime.local().zoneName !== 'Asia/Dhaka') {
+            parsedTimeBeta = luxon.DateTime.fromFormat(serverDataBeta.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "Asia/Dhaka", locale: "en-US" }).setZone(luxon.DateTime.local().zoneName);
+            parsedTimeGamma = luxon.DateTime.fromFormat(serverDataGamma.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "Asia/Dhaka", locale: "en-US" }).setZone(luxon.DateTime.local().zoneName);
         } else {
-            parsedTimeBeta = luxon.DateTime.fromFormat(serverDataBeta.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" });
-            parsedTimeGamma = luxon.DateTime.fromFormat(serverDataGamma.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "America/Chicago", locale: "en-US" });
+            parsedTimeBeta = luxon.DateTime.fromFormat(serverDataBeta.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "Asia/Dhaka", locale: "en-US" });
+            parsedTimeGamma = luxon.DateTime.fromFormat(serverDataGamma.last_updated, "hh:mm a; LLLL dd, yyyy", { zone: "Asia/Dhaka", locale: "en-US" });
         }
         const now = luxon.DateTime.local();
         const diffInMinutesBeta = now.diff(parsedTimeBeta, "minutes").toObject().minutes;
