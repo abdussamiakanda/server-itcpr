@@ -54,7 +54,7 @@ async function showDashboard() {
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" style="display: none;">
             <div class="section-header">
                 <h3>Gamma Server Info</h3>
             </div>
@@ -78,7 +78,7 @@ async function showDashboard() {
                     You have access to these servers with the following credentials:
                     <div class="server-credentials">
                         ${
-                            serverData.map(server => userData.lab.includes(server.lab) ? `
+                            serverData.map(server => userData.lab.includes(server.lab) && server.username === 'spintronics' ? `
                             <ul>
                                 <li><b>Server/PC:</b> ${server.pc}</li>
                                 <li><b>Network:</b> ${server.network}</li>
@@ -200,45 +200,45 @@ async function fetchServerData() {
             `;
         }
 
-        if (diffInMinutesGamma > 2) {
-            overviewContainerGamma.innerHTML = `
-                <div class="stat-card-full">
-                    <p class="description">
-                        The server is currently powered off.
-                        Contact us to power it on.
-                    </p>
-                </div>
-            `;
-        } else {
-            overviewContainerGamma.innerHTML = `
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">dns</span>
-                    <span class="stat-title">Server Memory</span>
-                </div>
-                <div class="stat-value">${serverDataGamma.memory.percent_used}</div>
-                <div class="stat-info">Used: ${serverDataGamma.memory.used} / ${serverDataGamma.memory.total}</div>
-            </div>
+        // if (diffInMinutesGamma > 2) {
+        //     overviewContainerGamma.innerHTML = `
+        //         <div class="stat-card-full">
+        //             <p class="description">
+        //                 The server is currently powered off.
+        //                 Contact us to power it on.
+        //             </p>
+        //         </div>
+        //     `;
+        // } else {
+        //     overviewContainerGamma.innerHTML = `
+        //     <div class="stat-card">
+        //         <div class="stat-header">
+        //             <span class="material-icons stat-icon">dns</span>
+        //             <span class="stat-title">Server Memory</span>
+        //         </div>
+        //         <div class="stat-value">${serverDataGamma.memory.percent_used}</div>
+        //         <div class="stat-info">Used: ${serverDataGamma.memory.used} / ${serverDataGamma.memory.total}</div>
+        //     </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">save</span>
-                    <span class="stat-title">Server Storage</span>
-                </div>
-                <div class="stat-value">${serverDataGamma.disk.percent_used}</div>
-                <div class="stat-info">Used: ${serverDataGamma.disk.used} / ${serverDataGamma.disk.total}</div>
-            </div>
+        //     <div class="stat-card">
+        //         <div class="stat-header">
+        //             <span class="material-icons stat-icon">save</span>
+        //             <span class="stat-title">Server Storage</span>
+        //         </div>
+        //         <div class="stat-value">${serverDataGamma.disk.percent_used}</div>
+        //         <div class="stat-info">Used: ${serverDataGamma.disk.used} / ${serverDataGamma.disk.total}</div>
+        //     </div>
 
-            <div class="stat-card">
-                <div class="stat-header">
-                    <span class="material-icons stat-icon">device_thermostat</span>
-                    <span class="stat-title">Server Temperature</span>
-                </div>
-                <div class="stat-value">${serverDataGamma.cpu_temperature}&#176; C</div>
-                <div class="stat-info">Uptime: ${daysGamma} days, ${hoursGamma} hours</div>
-            </div>
-            `;
-        }
+        //     <div class="stat-card">
+        //         <div class="stat-header">
+        //             <span class="material-icons stat-icon">device_thermostat</span>
+        //             <span class="stat-title">Server Temperature</span>
+        //         </div>
+        //         <div class="stat-value">${serverDataGamma.cpu_temperature}&#176; C</div>
+        //         <div class="stat-info">Uptime: ${daysGamma} days, ${hoursGamma} hours</div>
+        //     </div>
+        //     `;
+        // }
     } catch (error) {
         console.error('Error loading server content:', error);
         elements.contentArea.innerHTML = `<p class="error-message">Error loading server details.</p>`;
