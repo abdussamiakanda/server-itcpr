@@ -1,0 +1,301 @@
+/* Server-Themed Others */
+
+/* Server Card Styles (shared with Dashboard) */
+.server-card {
+  background: rgba(25, 30, 45, 0.7);
+  backdrop-filter: blur(8px);
+  border-radius: 15px;
+  border: 1px solid rgba(157, 157, 189, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.server-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
+  border-color: rgba(157, 157, 189, 0.7);
+}
+
+.card-header {
+  background: rgba(35, 40, 55, 0.9);
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(157, 157, 189, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+}
+
+.terminal-window-controls {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  left: 15px;
+}
+
+.control-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.control-dot.red { background-color: #ff5f56; }
+.control-dot.yellow { background-color: #ffbd2e; }
+.control-dot.green { background-color: #27c93f; }
+
+.card-title {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: rgb(157, 157, 189);
+  text-shadow: 0 0 5px rgba(157, 157, 189, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 80px;
+}
+
+.code-symbol {
+  color: #6a9955;
+  font-weight: normal;
+}
+
+.card-content {
+  padding: 20px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #c0c0c0;
+}
+
+.terminal-text {
+  color: #c0c0c0;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 15px;
+}
+
+.others-main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 2rem 4rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.overview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.stat-card {
+  background: rgba(10, 14, 39, 0.8);
+  border: 1px solid rgba(157, 157, 189, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(157, 157, 189, 0.2);
+  border-color: rgba(157, 157, 189, 0.4);
+}
+
+.stat-card-full {
+  background: rgba(10, 14, 39, 0.8);
+  border: 1px solid rgba(157, 157, 189, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  backdrop-filter: blur(10px);
+}
+
+.stat-card-full p {
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.9);
+  margin-bottom: 20px;
+}
+
+.stat-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.stat-icon {
+  color: rgb(157, 157, 189);
+  font-size: 1.5rem;
+}
+
+.stat-title {
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.7);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: rgb(157, 157, 189);
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(157, 157, 189, 0.3);
+}
+
+.stat-info {
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.6);
+  font-size: 0.95rem;
+}
+
+.server-access {
+  margin-top: 1.5rem;
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.9);
+}
+
+.server-access .terminal-text {
+  margin-bottom: 1rem;
+}
+
+.server-credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1rem;
+  max-width: 100%;
+  margin-top: 1rem;
+}
+
+.server-credentials ul {
+  border: 1px solid rgba(157, 157, 189, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  list-style: none;
+  background: rgba(157, 157, 189, 0.03);
+  transition: all 0.3s ease;
+}
+
+.server-credentials ul:hover {
+  border-color: rgba(157, 157, 189, 0.4);
+  background: rgba(157, 157, 189, 0.05);
+}
+
+.server-credentials ul li {
+  padding: 0.5rem 0;
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.9);
+  font-size: 0.9rem;
+}
+
+.server-credentials ul li b {
+  color: rgb(157, 157, 189);
+  margin-right: 0.5rem;
+}
+
+.server-access .note {
+  color: rgba(239, 68, 68, 0.8);
+  margin-top: 0.5rem;
+  text-align: right;
+  font-size: 0.85rem;
+  font-family: 'Courier New', monospace;
+}
+
+.server-access .server-guide {
+  margin-top: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(157, 157, 189, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(157, 157, 189, 0.3);
+  color: rgba(157, 157, 189, 0.9);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .others-main {
+    padding: 80px 1rem 2rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    margin-left: 0;
+  }
+
+  .terminal-window-controls {
+    position: relative;
+    left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .overview-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .stat-card {
+    width: 100%;
+  }
+
+  .stat-card-full {
+    width: 100%;
+  }
+
+  .server-credentials {
+    grid-template-columns: 1fr;
+  }
+
+  .server-credentials ul {
+    word-break: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  .others-main {
+    padding: 70px 0.75rem 1.5rem;
+  }
+
+  .card-header {
+    padding: 0.75rem;
+  }
+
+  .card-content {
+    padding: 1rem 0.75rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-value {
+    font-size: 1.5rem;
+  }
+
+  .server-credentials ul li {
+    font-size: 0.85rem;
+  }
+}

@@ -1,134 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ITCPR Server</title>
-    <link rel="shortcut icon" href="https://portal.itcpr.org/assets/logo.png">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://portal.itcpr.org/assets/logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-</head>
-<body>
-    <header>
-        <h1 onclick="goToPage('')">ITCPR Server</h1>
-        <nav>
-            <div id="loginBtn"><span class="material-icons">login</span> Login</div>
-        </nav>
-    </header>
-
-    <main>
-        <section class="card">
-            <h2>About The Server</h2>
-            <p>
-                The ITCPR private servers are maintained by the Institute for Theoretical and Computational Physics
-                Research to support high-performance computing, code development, data storage, and remote access for
-                authorized researchers and collaborators in theoretical and computational physics.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>Server Specifications — Alpha</h2>
-            <div class="specs-grid">
-                <div><strong>CPU:</strong> AMD RYZEN 7 7800X3D Processor</div>
-                <div><strong>GPU:</strong> NVIDIA GeForce RTX 4070 12GB GDDR6X - Titanium</div>
-                <div><strong>RAM:</strong> 64GB DDR4</div>
-                <div><strong>Storage:</strong> Samsung 980 Pro 2 TB PCIe 4.0 NVME SSD</div>
-                <div><strong>Operating System:</strong> Windows 11 & Linux</div>
-            </div>
-        </section>
-        
-        <section class="card">
-            <h2>Server Specifications — Beta</h2>
-            <div class="specs-grid">
-                <div><strong>CPU:</strong> AMD Ryzen Threadripper 2970WX 24-Core Processor</div>
-                <div><strong>GPU:</strong> Zotac GeForce RTX 3080 10GB GDDR6X</div>
-                <div><strong>RAM:</strong> 128GB DDR4</div>
-                <div><strong>Storage:</strong> Samsung 970 EVO plus 500 GB PCIe 4.0 NVME SSD, and Toshiba 2 TB HDD</div>
-                <div><strong>Operating System:</strong> Windows 10 & Linux</div>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>Access Policy</h2>
-            <div class="policy-block">
-                <p>Access is restricted to approved users. All unauthorized attempts are logged and subject to investigation.</p>
-                <ul>
-                    <li>Personal credentials only — sharing is prohibited.</li>
-                    <li>Multi-factor authentication required where applicable.</li>
-                    <li>SSH keys must be registered with the system administrator prior to access.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>Acceptable Use Policy</h2>
-            <div class="policy-block">
-                <p>All users agree to the following conditions:</p>
-                <ul>
-                    <li>Use resources solely for approved research and educational purposes.</li>
-                    <li>Refrain from unauthorized access, data sharing, or unlawful activity.</li>
-                    <li>Obtain prior approval before installing third-party software.</li>
-                    <li>Maintain system stability and respect shared resource limitations.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>Data & Security Policy</h2>
-            <div class="policy-block">
-                <p>Users must adhere to the following data and security guidelines:</p>
-                <ul>
-                    <li>All activities are monitored and logged.</li>
-                    <li>Sensitive data must be encrypted during transfer and at rest.</li>
-                    <li>Security breaches or suspicious behavior must be reported immediately.</li>
-                    <li>Accounts with prolonged inactivity may be disabled or removed.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="card">
-            <h2>Storage Policy</h2>
-            <p>
-                Users are assigned home directories with soft storage limits. Please avoid storing
-                unnecessary large files or binaries. The server is not a backup solution. Users are
-                responsible for their own data backups.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>Scheduled Maintenance</h2>
-            <p>
-                The servers do not follow a regular maintenance schedule. However, occasional maintenance or upgrades may be scheduled as needed.
-                In such cases, advance notice will be provided to all users via email.
-            </p>
-        </section>
-
-        <section class="card">
-            <h2>Citation Policy</h2>
-            <p>
-                If this server or its resources contributed to your research, please include
-                an acknowledgment in your publication. The following is an example of how to cite ITCPR:
-            </p>
-            <blockquote>
-                We would like to thank the Institute for Theoretical and Computational Physics
-                Research (ITCPR), Bangladesh, for providing sufficient platform, space, and
-                resources to accommodate this study. Their support is hugely appreciated by
-                the authors.
-            </blockquote>
-        </section>
-
-
-        <section class="card contact">
-            <h2>Contact</h2>
-            <p>For technical support or to report issues, please contact:</p>
-            <a href="mailto:info@itcpr.org" class="email">info@itcpr.org</a>
-        </section>
-    </main>
-
-    <footer>
-        &copy; <span id="year"></span> ITCPR. All Rights Reserved.
-    </footer>
-
-    <script type="module" src="js/script.js"></script>
-</body>
+    <title>ITCPR Server</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>

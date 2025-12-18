@@ -1,0 +1,769 @@
+/* Server-Themed Dashboard */
+
+.dashboard-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 2rem 4rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Server Card - Terminal Window Style */
+.server-card {
+  background: rgba(10, 14, 39, 0.9);
+  border: 1px solid rgba(157, 157, 189, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.server-card:hover {
+  border-color: rgba(157, 157, 189, 0.4);
+  box-shadow: 0 12px 48px rgba(157, 157, 189, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(157, 157, 189, 0.05);
+  border-bottom: 1px solid rgba(157, 157, 189, 0.2);
+  flex-wrap: wrap;
+}
+
+.terminal-window-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.control-dot.red {
+  background: #ef4444;
+}
+
+.control-dot.yellow {
+  background: #f59e0b;
+}
+
+.control-dot.green {
+  background: #10b981;
+}
+
+.control-dot:hover {
+  transform: scale(1.2);
+}
+
+.card-title {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: rgb(157, 157, 189);
+  letter-spacing: 1px;
+  font-weight: 600;
+  flex: 1;
+}
+
+.code-symbol {
+  color: #10b981;
+  margin-right: 0.5rem;
+}
+
+.server-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.server-status-badge.online {
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.server-status-badge.offline {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.card-content {
+  padding: 2rem 1.5rem;
+}
+
+/* Server Offline Message */
+.server-offline-message {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.offline-icon {
+  color: rgba(239, 68, 68, 0.5);
+  margin-bottom: 1rem;
+}
+
+.server-offline-message p {
+  color: rgba(157, 157, 189, 0.9);
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+.sub-text {
+  color: rgba(157, 157, 189, 0.6) !important;
+  font-size: 0.9rem !important;
+}
+
+/* Server Stats Grid */
+.server-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card-server {
+  background: rgba(157, 157, 189, 0.03);
+  border: 1px solid rgba(157, 157, 189, 0.15);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card-server:hover {
+  border-color: rgba(157, 157, 189, 0.3);
+  background: rgba(157, 157, 189, 0.05);
+  transform: translateY(-2px);
+}
+
+.stat-header-server {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.stat-icon-server {
+  color: rgb(157, 157, 189);
+  flex-shrink: 0;
+}
+
+.stat-title-server {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: rgba(157, 157, 189, 0.7);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.stat-value-server {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(157, 157, 189);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px rgba(157, 157, 189, 0.3);
+}
+
+.stat-info-server {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: rgba(157, 157, 189, 0.6);
+}
+
+.terminal-prompt {
+  color: #10b981;
+  margin-right: 0.5rem;
+}
+
+/* Access Credentials */
+.access-credentials {
+  font-family: 'Courier New', monospace;
+}
+
+.terminal-line-text {
+  color: rgba(157, 157, 189, 0.9);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.credentials-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.credential-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(157, 157, 189, 0.03);
+  border: 1px solid rgba(157, 157, 189, 0.15);
+  border-left: 3px solid rgba(157, 157, 189, 0.3);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+}
+
+.credential-item:hover {
+  border-left-color: rgb(157, 157, 189);
+  background: rgba(157, 157, 189, 0.08);
+}
+
+.cred-label-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.cred-label-wrapper svg {
+  color: rgb(157, 157, 189);
+  flex-shrink: 0;
+}
+
+.cred-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: rgba(157, 157, 189, 0.7);
+  min-width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.cred-value {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: rgb(157, 157, 189);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  border: 1px solid rgba(157, 157, 189, 0.2);
+  flex: 1;
+}
+
+/* Terminal Output */
+.terminal-output {
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.9);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.server-link {
+  color: #10b981;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.server-link:hover {
+  color: rgb(157, 157, 189);
+  text-shadow: 0 0 10px rgba(157, 157, 189, 0.5);
+}
+
+/* Server Table */
+.connections-table-wrapper {
+  overflow-x: auto;
+}
+
+.server-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Courier New', monospace;
+}
+
+.server-table th {
+  background: rgba(157, 157, 189, 0.05);
+  color: rgb(157, 157, 189);
+  padding: 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(157, 157, 189, 0.2);
+}
+
+.server-table td {
+  padding: 1rem;
+  color: rgba(157, 157, 189, 0.9);
+  border-bottom: 1px solid rgba(157, 157, 189, 0.1);
+}
+
+.server-table tr:hover {
+  background: rgba(157, 157, 189, 0.03);
+}
+
+.table-icon {
+  color: rgb(157, 157, 189);
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
+
+.monospace {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.connection-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.2);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.no-data {
+  text-align: center;
+  color: rgba(157, 157, 189, 0.5);
+  font-style: italic;
+  padding: 2rem !important;
+}
+
+/* Resilio List */
+.resilio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.resilio-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(157, 157, 189, 0.03);
+  border: 1px solid rgba(157, 157, 189, 0.15);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.resilio-item:hover {
+  border-color: rgba(157, 157, 189, 0.3);
+  background: rgba(157, 157, 189, 0.05);
+}
+
+.resilio-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.resilio-info svg {
+  color: rgb(157, 157, 189);
+  flex-shrink: 0;
+}
+
+.resilio-name {
+  font-family: 'Courier New', monospace;
+  color: rgb(157, 157, 189);
+  font-weight: 600;
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+.resilio-link {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  color: rgba(157, 157, 189, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.resilio-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(157, 157, 189, 0.3);
+  border-radius: 6px;
+  color: rgb(157, 157, 189);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(157, 157, 189, 0.1);
+  border-color: rgb(157, 157, 189);
+  transform: scale(1.1);
+}
+
+/* Requests Grid */
+.requests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.request-card {
+  background: rgba(157, 157, 189, 0.03);
+  border: 1px solid rgba(157, 157, 189, 0.15);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.request-card:hover {
+  border-color: rgba(157, 157, 189, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.request-card.pending {
+  background: rgba(239, 68, 68, 0.05);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.request-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.request-header svg {
+  color: rgb(157, 157, 189);
+}
+
+.request-name {
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: rgb(157, 157, 189);
+  font-weight: 600;
+}
+
+.request-id {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: rgba(157, 157, 189, 0.6);
+  margin-top: 0.25rem;
+}
+
+.request-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.server-btn-action {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.server-btn-action.success {
+  color: #10b981;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.server-btn-action.success:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+}
+
+.server-btn-action.danger {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.server-btn-action.danger:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
+
+/* Buttons */
+.server-btn-small {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(157, 157, 189, 0.3);
+  color: rgb(157, 157, 189);
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.server-btn-small:hover {
+  background: rgb(157, 157, 189);
+  color: #0a0e27;
+  border-color: rgb(157, 157, 189);
+  box-shadow: 0 0 15px rgba(157, 157, 189, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-main {
+    padding: 80px 1rem 2rem;
+  }
+
+  .server-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .requests-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+    margin-left: 0;
+  }
+
+  .terminal-window-controls {
+    position: relative;
+    left: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-content {
+    padding: 1.5rem 1rem;
+  }
+
+  .cred-label {
+    min-width: auto;
+  }
+
+  .cred-label-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .credentials-list {
+    flex-direction: column;
+  }
+
+  .credential-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cred-value {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .resilio-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .resilio-info {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .resilio-info svg {
+    flex-shrink: 0;
+  }
+
+  .resilio-name {
+    white-space: nowrap;
+    min-width: auto;
+    flex-shrink: 0;
+  }
+
+  .resilio-link {
+    font-size: 0.8rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    margin-top: 0.5rem;
+    flex: 1 1 100%;
+  }
+
+  .request-actions {
+    width: 100%;
+  }
+
+  .server-btn-action {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .server-table {
+    font-size: 0.85rem;
+  }
+
+  .server-table th,
+  .server-table td {
+    padding: 0.5rem;
+  }
+
+  .server-btn-small {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-main {
+    padding: 70px 0.75rem 1.5rem;
+  }
+
+  .card-header {
+    padding: 0.75rem;
+  }
+
+  .card-content {
+    padding: 1rem 0.75rem;
+  }
+
+  .stat-card-server {
+    padding: 1rem;
+  }
+
+  .stat-value-server {
+    font-size: 1.5rem;
+  }
+
+  .resilio-info {
+    gap: 0.4rem;
+  }
+
+  .resilio-name {
+    font-size: 0.85rem;
+  }
+
+  .resilio-link {
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    flex: 1 1 100%;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .server-table {
+    font-size: 0.75rem;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .server-table thead,
+  .server-table tbody,
+  .server-table tr,
+  .server-table td {
+    display: block;
+  }
+
+  .server-table thead {
+    display: none;
+  }
+
+  .server-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(157, 157, 189, 0.2);
+    border-radius: 8px;
+    padding: 0.75rem;
+    background: rgba(157, 157, 189, 0.03);
+  }
+
+  .server-table td {
+    padding: 0.5rem 0;
+    text-align: left;
+    border: none;
+  }
+
+  .server-table td:before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: rgba(157, 157, 189, 0.7);
+    display: inline-block;
+    min-width: 100px;
+  }
+
+  .server-table td.no-data:before {
+    display: none;
+  }
+}

@@ -1,0 +1,23 @@
+/* ConfirmDialog Styles */
+
+.confirm-message {
+  color: rgba(157, 157, 189, 0.9);
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.modal-btn.danger {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+  border: 2px solid #ef4444;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.modal-btn.danger:hover {
+  background: linear-gradient(45deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9));
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.1);
+}
+
