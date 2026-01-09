@@ -9,6 +9,7 @@ import { sendEmail, getEmailTemplate } from '../services/email'
 import { authenticateZeroTierMember, deauthenticateZeroTierMember } from '../services/zerotier'
 import { Server, HardDrive, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon } from 'lucide-react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../components/Modal'
 import ConfirmDialog from '../components/ConfirmDialog'
 import './Dashboard.css'
@@ -956,6 +957,7 @@ function Dashboard() {
         title={confirmDialog.title}
         message={confirmDialog.message}
       />
+      <Footer />
     </div>
   )
 }

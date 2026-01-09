@@ -5,6 +5,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { API_BASE_URL } from '../config/api'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Monitor.css'
 
 function Monitor() {
@@ -225,6 +226,7 @@ function Monitor() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

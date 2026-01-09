@@ -5,6 +5,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { API_BASE_URL } from '../config/api'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Statistics.css'
 
 function Statistics() {
@@ -350,6 +351,7 @@ function Statistics() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

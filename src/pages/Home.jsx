@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 import { HardDrive, Wrench } from 'lucide-react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Home.css'
 
 function Home() {
@@ -318,12 +319,7 @@ by the authors.`}
         </section>
       </main>
 
-      <footer className="server-footer">
-        <div className="footer-line"></div>
-        <p>
-          <span className="footer-prompt">©</span> {new Date().getFullYear()} ITCPR. All Rights Reserved.
-        </p>
-      </footer>
+      <Footer />
     </div>
   )
 }

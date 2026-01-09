@@ -9,6 +9,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html body.server-theme {
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+}
+
 body {
   background-color: #f8fafc;
   color: #4b5563;
@@ -20,9 +26,12 @@ body {
 }
 
 body.server-theme {
-  background-color: #0a0e27 !important;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%) !important;
+  background-attachment: fixed !important;
   color: rgb(157, 157, 189) !important;
   padding: 0 !important;
+  min-height: 100vh !important;
+  padding-bottom: 0 !important;
 }
 
 body.server-theme #root {
@@ -34,6 +43,11 @@ body.server-theme #root {
 #root {
   width: 100%;
   min-height: 100vh;
+}
+
+body.server-theme #root {
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+  background-attachment: fixed;
 }
 
 /* Page Container - Dark Server Theme */

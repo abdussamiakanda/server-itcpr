@@ -559,32 +559,6 @@ body.server-theme #root {
   text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
 }
 
-/* Footer */
-.server-footer {
-  max-width: 1200px;
-  margin: 4rem auto 2rem;
-  padding: 2rem;
-  text-align: center;
-  border-top: 1px solid rgba(157, 157, 189, 0.2);
-}
-
-.footer-line {
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(157, 157, 189, 0.3), transparent);
-  margin-bottom: 1.5rem;
-}
-
-.server-footer p {
-  font-family: 'Courier New', monospace;
-  color: rgba(157, 157, 189, 0.6);
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.footer-prompt {
-  color: #10b981;
-}
-
 /* Responsive Design */
 @media screen and (max-width: 768px) {
   .server-header-content {

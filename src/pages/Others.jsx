@@ -4,7 +4,9 @@ import { useAuth } from '../contexts/AuthContext'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { API_BASE_URL } from '../config/api'
+import { Server, HardDrive, Thermometer } from 'lucide-react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Others.css'
 
 function Others() {
@@ -68,10 +70,24 @@ function Others() {
 
   if (!userData || !serverDataBeta) {
     return (
-      <div>
+      <div className="page-container">
         <Navbar />
-        <main style={{ marginTop: '70px', padding: '20px' }}>
-          <div className="section">Loading...</div>
+        <main className="others-main">
+          <div className="server-card">
+            <div className="card-header">
+              <div className="terminal-window-controls">
+                <span className="control-dot red"></span>
+                <span className="control-dot yellow"></span>
+                <span className="control-dot green"></span>
+              </div>
+              <div className="card-title">
+                <span className="code-symbol">$</span> LOADING...
+              </div>
+            </div>
+            <div className="card-content">
+              <p className="terminal-text">Initializing server connection...</p>
+            </div>
+          </div>
         </main>
       </div>
     )
@@ -100,41 +116,39 @@ function Others() {
             </div>
           </div>
           <div className="card-content">
-            <div className="overview-container">
+            <div className="server-stats-grid">
             {!isServerOnlineBeta ? (
-              <div className="stat-card-full">
-                <p className="description">
-                  The server is currently powered off.
-                  Contact us to power it on.
-                </p>
+              <div className="server-offline-message">
+                <p>The server is currently powered off.</p>
+                <p className="sub-text">Contact us to power it on.</p>
               </div>
             ) : (
               <>
-                <div className="stat-card">
-                  <div className="stat-header">
-                    <span className="material-icons stat-icon">dns</span>
-                    <span className="stat-title">Server Memory</span>
+                <div className="stat-card-server">
+                  <div className="stat-header-server">
+                    <Server className="stat-icon-server" size={20} />
+                    <span className="stat-title-server">Server Memory</span>
                   </div>
-                  <div className="stat-value">{serverDataBeta.memory.percent_used}</div>
-                  <div className="stat-info">Used: {serverDataBeta.memory.used} / {serverDataBeta.memory.total}</div>
+                  <div className="stat-value-server">{serverDataBeta.memory.percent_used}</div>
+                  <div className="stat-info-server">Used: {serverDataBeta.memory.used} / {serverDataBeta.memory.total}</div>
                 </div>
 
-                <div className="stat-card">
-                  <div className="stat-header">
-                    <span className="material-icons stat-icon">save</span>
-                    <span className="stat-title">Server Storage</span>
+                <div className="stat-card-server">
+                  <div className="stat-header-server">
+                    <HardDrive className="stat-icon-server" size={20} />
+                    <span className="stat-title-server">Server Storage</span>
                   </div>
-                  <div className="stat-value">{serverDataBeta.disk.percent_used}</div>
-                  <div className="stat-info">Used: {serverDataBeta.disk.used} / {serverDataBeta.disk.total}</div>
+                  <div className="stat-value-server">{serverDataBeta.disk.percent_used}</div>
+                  <div className="stat-info-server">Used: {serverDataBeta.disk.used} / {serverDataBeta.disk.total}</div>
                 </div>
 
-                <div className="stat-card">
-                  <div className="stat-header">
-                    <span className="material-icons stat-icon">device_thermostat</span>
-                    <span className="stat-title">Server Temperature</span>
+                <div className="stat-card-server">
+                  <div className="stat-header-server">
+                    <Thermometer className="stat-icon-server" size={20} />
+                    <span className="stat-title-server">Server Temperature</span>
                   </div>
-                  <div className="stat-value">{serverDataBeta.cpu_temperature}° C</div>
-                  <div className="stat-info">Uptime: {daysBeta} days, {hoursBeta} hours</div>
+                  <div className="stat-value-server">{serverDataBeta.cpu_temperature}° C</div>
+                  <div className="stat-info-server">Uptime: {daysBeta} days, {hoursBeta} hours</div>
                 </div>
               </>
             )}
@@ -187,6 +201,7 @@ function Others() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

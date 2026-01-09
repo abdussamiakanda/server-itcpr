@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { ref as dbRef, get as getRTData } from 'firebase/database'
 import { rtdb } from '../config/firebase'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import './Changelog.css'
 
 function Changelog() {
@@ -175,6 +176,7 @@ function Changelog() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

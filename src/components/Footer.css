@@ -1,0 +1,43 @@
+/* Footer */
+.server-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid rgba(157, 157, 189, 0.2);
+}
+
+.footer-line {
+  height: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.server-footer p {
+  font-family: 'Courier New', monospace;
+  color: rgba(157, 157, 189, 0.6);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.footer-prompt {
+  color: #10b981;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .server-footer {
+    margin: 2rem auto 1rem;
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .server-footer {
+    margin: 1.5rem auto 1rem;
+    padding: 1rem 0.75rem;
+  }
+
+  .server-footer p {
+    font-size: 0.85rem;
+  }
+}
