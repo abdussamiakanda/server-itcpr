@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { API_BASE_URL } from '../config/api'
-import { Server, HardDrive, Thermometer } from 'lucide-react'
+import { Cpu, HardDrive, Thermometer } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './Others.css'
@@ -126,7 +126,7 @@ function Others() {
               <>
                 <div className="stat-card-server">
                   <div className="stat-header-server">
-                    <Server className="stat-icon-server" size={20} />
+                    <Cpu className="stat-icon-server" size={20} />
                     <span className="stat-title-server">Server Memory</span>
                   </div>
                   <div className="stat-value-server">{serverDataBeta.memory.percent_used}</div>

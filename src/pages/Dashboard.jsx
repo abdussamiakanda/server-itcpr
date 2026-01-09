@@ -7,7 +7,7 @@ import { db } from '../config/firebase'
 import { API_BASE_URL, PORTAL_GUIDE_URL } from '../config/api'
 import { sendEmail, getEmailTemplate } from '../services/email'
 import { authenticateZeroTierMember, deauthenticateZeroTierMember } from '../services/zerotier'
-import { Server, HardDrive, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon } from 'lucide-react'
+import { Server, HardDrive, Cpu, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../components/Modal'
@@ -543,7 +543,7 @@ function Dashboard() {
               <div className="server-stats-grid">
                 <div className="stat-card-server">
                   <div className="stat-header-server">
-                    <HardDrive size={24} className="stat-icon-server" />
+                    <Cpu size={24} className="stat-icon-server" />
                     <span className="stat-title-server">Memory</span>
                   </div>
                   <div className="stat-value-server">{serverData.memory.percent_used}</div>
@@ -658,7 +658,6 @@ function Dashboard() {
                     serverUsers.map((user, idx) => (
                       <tr key={idx}>
                         <td data-label="User">
-                          <Users size={16} className="table-icon" />
                           {user.name}
                         </td>
                         <td data-label="Last Connected" className="monospace">{user.connectedAt}</td>
@@ -750,7 +749,25 @@ function Dashboard() {
                 {serverRequests.map(user => (
                   <div key={user.id} className={`request-card ${user.status === 'pending' ? 'pending' : ''}`}>
                     <div className="request-header">
-                      <Users size={20} />
+                      <div className="request-avatar-container">
+                        {user.photoURL ? (
+                          <img 
+                            src={user.photoURL} 
+                            alt={user.name}
+                            className="request-avatar"
+                            onError={(e) => {
+                              e.target.style.display = 'none';
+                              const fallback = e.target.parentElement.querySelector('.request-avatar-fallback');
+                              if (fallback) fallback.style.display = 'block';
+                            }}
+                          />
+                        ) : null}
+                        <Users 
+                          size={20} 
+                          className="request-avatar-fallback"
+                          style={{ display: user.photoURL ? 'none' : 'block' }}
+                        />
+                      </div>
                       <div>
                         <div className="request-name">{user.name}</div>
                         <div className="request-id">ZeroTier: {user.zerotierId}</div>
