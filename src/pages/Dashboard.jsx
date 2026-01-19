@@ -30,6 +30,7 @@ function Dashboard() {
   const [formData, setFormData] = useState({ zerotierId: '', userId: '', resilioLink: '', ip: '', serverCode: '', ssh_folder: '' })
   const [availableUsers, setAvailableUsers] = useState([])
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', message: '', onConfirm: null })
+  const [isRequestingAccess, setIsRequestingAccess] = useState(false)
 
   useEffect(() => {
     if (userData) {
@@ -174,6 +175,7 @@ function Dashboard() {
       return
     }
 
+    setIsRequestingAccess(true)
     try {
       const userRef = doc(db, 'users', userData.uid)
       await updateDoc(userRef, { zerotierId: formData.zerotierId })
@@ -182,7 +184,7 @@ function Dashboard() {
         <p>You will receive an email when your access is approved and an IP address is assigned.</p>
         <p>Your ZeroTier ID: <b>${formData.zerotierId}</b></p>
       `))
-      await sendEmail('abdussamiakanda@gmail.com', 'Server Access Request', getEmailTemplate('Md Abdus Sami Akanda', `
+      await sendEmail('masakanda@mail.itcpr.org', 'Server Access Request', getEmailTemplate('Md Abdus Sami Akanda', `
         <p>${userData.name} has requested server access.</p>
         <p>ZeroTier ID: <b>${formData.zerotierId}</b></p>
         <p>Please review and approve or reject the request.</p>
@@ -194,6 +196,8 @@ function Dashboard() {
     } catch (error) {
       console.error('Error requesting access:', error)
       toast.error('Error submitting request. Please try again.')
+    } finally {
+      setIsRequestingAccess(false)
     }
   }
 
@@ -833,8 +837,10 @@ function Dashboard() {
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="modal-btn secondary" onClick={() => setShowAccessModal(false)}>Cancel</button>
-          <button className="modal-btn primary" onClick={handleRequestAccess}>Request Access</button>
+          <button className="modal-btn secondary" onClick={() => setShowAccessModal(false)} disabled={isRequestingAccess}>Cancel</button>
+          <button className="modal-btn primary" onClick={handleRequestAccess} disabled={isRequestingAccess}>
+            {isRequestingAccess ? 'Requesting...' : 'Request Access'}
+          </button>
         </ModalFooter>
       </Modal>
 
