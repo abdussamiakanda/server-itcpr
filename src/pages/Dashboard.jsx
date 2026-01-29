@@ -4,7 +4,7 @@ import toast from 'react-hot-toast'
 import { useAuth } from '../contexts/AuthContext'
 import { collection, getDocs, doc, getDoc, updateDoc, deleteField, query, orderBy } from 'firebase/firestore'
 import { db } from '../config/firebase'
-import { API_BASE_URL, PORTAL_GUIDE_URL } from '../config/api'
+import { API_BASE_URL, PORTAL_GUIDE_URL, ZEROTIER_NETWORK_ID } from '../config/api'
 import { sendEmail, getEmailTemplate } from '../services/email'
 import { authenticateZeroTierMember, deauthenticateZeroTierMember } from '../services/zerotier'
 import { Server, HardDrive, Cpu, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon } from 'lucide-react'
@@ -831,7 +831,14 @@ function Dashboard() {
               id="zerotierId"
               className="form-control"
               value={formData.zerotierId}
-              onChange={(e) => setFormData({ ...formData, zerotierId: e.target.value })}
+              onChange={(e) => {
+                const value = e.target.value.slice(0, 10)
+                if (value.length >= 10 && ZEROTIER_NETWORK_ID && value === ZEROTIER_NETWORK_ID.slice(0, 10)) {
+                  toast.error('That\'s the network ID, not your address. Please enter your ZeroTier member address.')
+                }
+                setFormData({ ...formData, zerotierId: value })
+              }}
+              maxLength={10}
               required
             />
           </div>
