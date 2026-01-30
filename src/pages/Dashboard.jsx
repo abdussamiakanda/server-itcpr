@@ -179,6 +179,11 @@ function Dashboard() {
       toast.error('Please enter your ZeroTier ID.')
       return
     }
+    const zerotierValue = formData.zerotierId.trim().slice(0, 10)
+    if (zerotierValue.length >= 10 && ZEROTIER_NETWORK_ID && zerotierValue === ZEROTIER_NETWORK_ID.slice(0, 10)) {
+      toast.error('That\'s the network ID, not your address. Please enter your ZeroTier member address.')
+      return
+    }
 
     setIsRequestingAccess(true)
     try {
