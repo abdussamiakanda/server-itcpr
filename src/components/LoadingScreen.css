@@ -1,0 +1,82 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+  background-attachment: fixed;
+  z-index: 9999;
+}
+
+.loading-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(157, 157, 189, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 157, 189, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+.loading-screen__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.loading-screen__spinner {
+  width: 44px;
+  height: 44px;
+  border: 2.5px solid rgba(157, 157, 189, 0.12);
+  border-top-color: rgb(157, 157, 189);
+  border-radius: 50%;
+  animation: loading-screen-spin 0.85s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.loading-screen__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(157, 157, 189, 0.85);
+  display: flex;
+  align-items: center;
+}
+
+.loading-screen__bounce {
+  display: inline-flex;
+  margin-left: 2px;
+}
+
+.loading-screen__bounce span {
+  animation: loading-screen-bounce 1.4s ease-in-out infinite both;
+  color: rgb(157, 157, 189);
+}
+
+.loading-screen__bounce span:nth-child(1) { animation-delay: 0s; }
+.loading-screen__bounce span:nth-child(2) { animation-delay: 0.2s; }
+.loading-screen__bounce span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loading-screen-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-screen-bounce {
+  0%, 60%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}

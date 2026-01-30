@@ -7,7 +7,7 @@ import { db } from '../config/firebase'
 import { API_BASE_URL, PORTAL_GUIDE_URL, ZEROTIER_NETWORK_ID } from '../config/api'
 import { sendEmail, getEmailTemplate } from '../services/email'
 import { authenticateZeroTierMember, deauthenticateZeroTierMember } from '../services/zerotier'
-import { Server, HardDrive, Cpu, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon } from 'lucide-react'
+import { Server, HardDrive, Cpu, Thermometer, Users, Key, Copy, Trash2, Check, X, Edit, Link as LinkIcon, Loader2 } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../components/Modal'
@@ -31,6 +31,11 @@ function Dashboard() {
   const [availableUsers, setAvailableUsers] = useState([])
   const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, title: '', message: '', onConfirm: null })
   const [isRequestingAccess, setIsRequestingAccess] = useState(false)
+  const [isAddingResilio, setIsAddingResilio] = useState(false)
+  const [isApproving, setIsApproving] = useState(false)
+  const [isUpdatingAccess, setIsUpdatingAccess] = useState(false)
+  const [confirmDialogLoading, setConfirmDialogLoading] = useState(false)
+  const [openingApproveModalId, setOpeningApproveModalId] = useState(null)
 
   useEffect(() => {
     if (userData) {
@@ -208,6 +213,7 @@ function Dashboard() {
     }
     if (!selectedUser) return
 
+    setIsApproving(true)
     try {
       const userRef = doc(db, 'users', selectedUser.id)
       const user = await getDoc(userRef)
@@ -238,6 +244,8 @@ function Dashboard() {
     } catch (error) {
       console.error('Error approving request:', error)
       toast.error('Error approving request. Please try again.')
+    } finally {
+      setIsApproving(false)
     }
   }
 
@@ -247,6 +255,7 @@ function Dashboard() {
       title: 'Delete Request',
       message: 'Are you sure you want to delete this request?',
       onConfirm: async () => {
+        setConfirmDialogLoading(true)
         try {
           const userRef = doc(db, 'users', uid)
           const user = await getDoc(userRef)
@@ -262,6 +271,8 @@ function Dashboard() {
           console.error('Error rejecting request:', error)
           toast.error('Error deleting request. Please try again.')
           setConfirmDialog({ isOpen: false, title: '', message: '', onConfirm: null })
+        } finally {
+          setConfirmDialogLoading(false)
         }
       }
     })
@@ -273,6 +284,7 @@ function Dashboard() {
       title: 'Revoke Access',
       message: 'Are you sure you want to revoke access for this user?',
       onConfirm: async () => {
+        setConfirmDialogLoading(true)
         try {
           const userRef = doc(db, 'users', uid)
           const user = await getDoc(userRef)
@@ -294,6 +306,8 @@ function Dashboard() {
           console.error('Error revoking access:', error)
           toast.error('Error revoking access. Please try again.')
           setConfirmDialog({ isOpen: false, title: '', message: '', onConfirm: null })
+        } finally {
+          setConfirmDialogLoading(false)
         }
       }
     })
@@ -305,6 +319,7 @@ function Dashboard() {
       return
     }
 
+    setIsAddingResilio(true)
     try {
       const userRef = doc(db, 'users', formData.userId)
       await updateDoc(userRef, { resilio: formData.resilioLink })
@@ -316,6 +331,8 @@ function Dashboard() {
     } catch (error) {
       console.error('Error adding Resilio Sync link:', error)
       toast.error('Error adding Resilio Sync link. Please try again.')
+    } finally {
+      setIsAddingResilio(false)
     }
   }
 
@@ -325,6 +342,7 @@ function Dashboard() {
       title: 'Remove Resilio Sync Link',
       message: 'Are you sure you want to remove this Resilio Sync link?',
       onConfirm: async () => {
+        setConfirmDialogLoading(true)
         try {
           const userRef = doc(db, 'users', uid)
           await updateDoc(userRef, { resilio: deleteField() })
@@ -335,6 +353,8 @@ function Dashboard() {
           console.error('Error removing Resilio Sync link:', error)
           toast.error('Error removing Resilio Sync link. Please try again.')
           setConfirmDialog({ isOpen: false, title: '', message: '', onConfirm: null })
+        } finally {
+          setConfirmDialogLoading(false)
         }
       }
     })
@@ -388,10 +408,15 @@ function Dashboard() {
   }
 
   async function openApproveModal(user) {
-    const { newUserIP, newUserCode } = await getNewUserCodes()
-    setSelectedUser(user)
-    setFormData({ ...formData, ip: newUserIP, serverCode: newUserCode, ssh_folder: '' })
-    setShowApproveModal(true)
+    setOpeningApproveModalId(user.id)
+    try {
+      const { newUserIP, newUserCode } = await getNewUserCodes()
+      setSelectedUser(user)
+      setFormData({ ...formData, ip: newUserIP, serverCode: newUserCode, ssh_folder: '' })
+      setShowApproveModal(true)
+    } finally {
+      setOpeningApproveModalId(null)
+    }
   }
 
   async function openEditModal(user) {
@@ -407,6 +432,7 @@ function Dashboard() {
     }
     if (!selectedUser) return
 
+    setIsUpdatingAccess(true)
     try {
       const userRef = doc(db, 'users', selectedUser.id)
       await updateDoc(userRef, {
@@ -423,6 +449,8 @@ function Dashboard() {
     } catch (error) {
       console.error('Error updating access:', error)
       toast.error('Error updating access. Please try again.')
+    } finally {
+      setIsUpdatingAccess(false)
     }
   }
 
@@ -780,9 +808,18 @@ function Dashboard() {
                     <div className="request-actions">
                       {user.status === 'pending' ? (
                         <>
-                          <button className="server-btn-action success" onClick={() => openApproveModal(user)}>
-                            <Check size={16} />
-                            Approve
+                          <button className="server-btn-action success" onClick={() => openApproveModal(user)} disabled={openingApproveModalId === user.id}>
+                            {openingApproveModalId === user.id ? (
+                              <>
+                                <Loader2 size={16} className="btn-spinner" />
+                                Opening...
+                              </>
+                            ) : (
+                              <>
+                                <Check size={16} />
+                                Approve
+                              </>
+                            )}
                           </button>
                           <button className="server-btn-action danger" onClick={() => handleRejectRequest(user.id)}>
                             <X size={16} />
@@ -846,7 +883,14 @@ function Dashboard() {
         <ModalFooter>
           <button className="modal-btn secondary" onClick={() => setShowAccessModal(false)} disabled={isRequestingAccess}>Cancel</button>
           <button className="modal-btn primary" onClick={handleRequestAccess} disabled={isRequestingAccess}>
-            {isRequestingAccess ? 'Requesting...' : 'Request Access'}
+            {isRequestingAccess ? (
+              <>
+                <Loader2 size={18} className="btn-spinner" />
+                Requesting...
+              </>
+            ) : (
+              'Request Access'
+            )}
           </button>
         </ModalFooter>
       </Modal>
@@ -885,8 +929,17 @@ function Dashboard() {
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="modal-btn secondary" onClick={() => setShowResilioModal(false)}>Cancel</button>
-          <button className="modal-btn primary" onClick={handleAddResilio}>Add Link</button>
+          <button className="modal-btn secondary" onClick={() => setShowResilioModal(false)} disabled={isAddingResilio}>Cancel</button>
+          <button className="modal-btn primary" onClick={handleAddResilio} disabled={isAddingResilio}>
+            {isAddingResilio ? (
+              <>
+                <Loader2 size={18} className="btn-spinner" />
+                Adding...
+              </>
+            ) : (
+              'Add Link'
+            )}
+          </button>
         </ModalFooter>
       </Modal>
 
@@ -930,8 +983,17 @@ function Dashboard() {
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="modal-btn secondary" onClick={() => setShowApproveModal(false)}>Cancel</button>
-          <button className="modal-btn primary" onClick={handleApproveRequest}>Approve</button>
+          <button className="modal-btn secondary" onClick={() => setShowApproveModal(false)} disabled={isApproving}>Cancel</button>
+          <button className="modal-btn primary" onClick={handleApproveRequest} disabled={isApproving}>
+            {isApproving ? (
+              <>
+                <Loader2 size={18} className="btn-spinner" />
+                Approving...
+              </>
+            ) : (
+              'Approve'
+            )}
+          </button>
         </ModalFooter>
       </Modal>
 
@@ -975,8 +1037,17 @@ function Dashboard() {
           </div>
         </ModalBody>
         <ModalFooter>
-          <button className="modal-btn secondary" onClick={() => setShowEditModal(false)}>Cancel</button>
-          <button className="modal-btn primary" onClick={handleUpdateAccess}>Update</button>
+          <button className="modal-btn secondary" onClick={() => setShowEditModal(false)} disabled={isUpdatingAccess}>Cancel</button>
+          <button className="modal-btn primary" onClick={handleUpdateAccess} disabled={isUpdatingAccess}>
+            {isUpdatingAccess ? (
+              <>
+                <Loader2 size={18} className="btn-spinner" />
+                Updating...
+              </>
+            ) : (
+              'Update'
+            )}
+          </button>
         </ModalFooter>
       </Modal>
 
@@ -986,6 +1057,7 @@ function Dashboard() {
         onConfirm={confirmDialog.onConfirm || (() => {})}
         title={confirmDialog.title}
         message={confirmDialog.message}
+        loading={confirmDialogLoading}
       />
       <Footer />
     </div>

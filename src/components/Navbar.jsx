@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { LogIn, Menu, X } from 'lucide-react'
+import { LogIn, Menu, X, Loader2 } from 'lucide-react'
 import './Navbar.css'
 
 function Navbar() {
@@ -9,6 +9,7 @@ function Navbar() {
   const location = useLocation()
   const { user, signOut, signInWithGoogle } = useAuth()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isLoggingIn, setIsLoggingIn] = useState(false)
   const menuRef = useRef(null)
 
   // Close menu when clicking outside
@@ -48,10 +49,13 @@ function Navbar() {
   }
 
   const handleLogin = async () => {
+    setIsLoggingIn(true)
     try {
       await signInWithGoogle()
     } catch (error) {
       console.error('Login failed:', error)
+    } finally {
+      setIsLoggingIn(false)
     }
   }
 
@@ -111,9 +115,18 @@ function Navbar() {
                      </div>
                    </>
                  ) : (
-                   <button className="server-btn" onClick={handleLogin}>
-                     <LogIn size={16} />
-                     <span>LOGIN</span>
+                   <button className="server-btn" onClick={handleLogin} disabled={isLoggingIn}>
+                     {isLoggingIn ? (
+                       <>
+                         <Loader2 size={16} className="btn-spinner" />
+                         <span>LOGGING IN...</span>
+                       </>
+                     ) : (
+                       <>
+                         <LogIn size={16} />
+                         <span>LOGIN</span>
+                       </>
+                     )}
                    </button>
           )}
           </nav>

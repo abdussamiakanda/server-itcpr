@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
+import { Loader2 } from 'lucide-react'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from './Modal'
 import './ConfirmDialog.css'
 
-function ConfirmDialog({ isOpen, onClose, onConfirm, title, message }) {
+function ConfirmDialog({ isOpen, onClose, onConfirm, title, message, loading }) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
@@ -25,11 +26,18 @@ function ConfirmDialog({ isOpen, onClose, onConfirm, title, message }) {
         <p className="confirm-message">{message || 'Are you sure you want to proceed?'}</p>
       </ModalBody>
       <ModalFooter>
-        <button className="modal-btn secondary" onClick={onClose}>
+        <button className="modal-btn secondary" onClick={onClose} disabled={loading}>
           Cancel
         </button>
-        <button className="modal-btn primary danger" onClick={onConfirm}>
-          Confirm
+        <button className="modal-btn primary danger" onClick={onConfirm} disabled={loading}>
+          {loading ? (
+            <>
+              <Loader2 size={18} className="btn-spinner" />
+              Confirming...
+            </>
+          ) : (
+            'Confirm'
+          )}
         </button>
       </ModalFooter>
     </Modal>
