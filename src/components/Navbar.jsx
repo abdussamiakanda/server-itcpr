@@ -40,7 +40,7 @@ function Navbar() {
     { path: '/dashboard', icon: 'home', label: 'Dashboard' },
     { path: '/statistics', icon: 'bar_chart', label: 'Statistics' },
     { path: '/monitor', icon: 'track_changes', label: 'Monitor' },
-    { path: '/changelog', icon: 'history', label: 'Changelog' },
+    // { path: '/changelog', icon: 'history', label: 'Changelog' }, // disabled for now
     { path: '/others', icon: 'expand_circle_down', label: 'Others' }
   ]
 

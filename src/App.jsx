@@ -6,7 +6,6 @@ import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Monitor from './pages/Monitor'
 import Statistics from './pages/Statistics'
-import Changelog from './pages/Changelog'
 import Others from './pages/Others'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -48,14 +47,7 @@ function AppRoutes() {
           </ProtectedRoute>
         }
       />
-      <Route
-        path="/changelog"
-        element={
-          <ProtectedRoute>
-            <Changelog />
-          </ProtectedRoute>
-        }
-      />
+      <Route path="/changelog" element={<Navigate to="/dashboard" replace />} />
       <Route
         path="/others"
         element={
