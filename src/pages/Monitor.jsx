@@ -24,7 +24,7 @@ function Monitor() {
     let filtered = [...logData]
 
     if (userData?.type !== 'admin') {
-      const userIps = userData?.ip ? userData.ip.split(';').map(ip => ip.trim()) : []
+      const userIps = userData?.ip ? userData.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean) : []
       filtered = filtered.filter(log => userIps.includes(log.ip))
     }
 
@@ -71,7 +71,7 @@ function Monitor() {
     usersSnapshot.docs.forEach(doc => {
       const userData = doc.data()
       const userName = userData.name
-      const ipList = userData.ip ? userData.ip.split(';') : []
+      const ipList = userData.ip ? userData.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean) : []
 
       ipList.forEach(ip => {
         const trimmedIp = ip.trim()
@@ -93,7 +93,7 @@ function Monitor() {
       
       let filtered = parsed
       if (userData.type !== 'admin') {
-        const userIps = userData.ip ? userData.ip.split(';').map(ip => ip.trim()) : []
+        const userIps = userData.ip ? userData.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean) : []
         filtered = parsed.filter(log => userIps.includes(log.ip))
       }
       

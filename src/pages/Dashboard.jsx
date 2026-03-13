@@ -40,6 +40,7 @@ function Dashboard() {
   const [bookingForm, setBookingForm] = useState({ date: '', startTime: '09:00', endTime: '12:00', purpose: '' })
   const [isSubmittingBooking, setIsSubmittingBooking] = useState(false)
   const [showBookingModal, setShowBookingModal] = useState(false)
+  const [selectedBookingDetails, setSelectedBookingDetails] = useState(null)
 
   useEffect(() => {
     if (userData) {
@@ -72,7 +73,7 @@ function Dashboard() {
     usersSnapshot.docs.forEach(doc => {
       const userData = doc.data()
       const userName = userData.name
-      const ipList = userData.ip ? userData.ip.split(';') : []
+      const ipList = userData.ip ? userData.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean) : []
 
       ipList.forEach(ip => {
         const trimmedIp = ip.trim()
@@ -127,7 +128,7 @@ function Dashboard() {
 
     for (const user of users) {
       if (user.ip) {
-        const userIps = user.ip.split(';')
+        const userIps = user.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean)
         const isConnected = userIps.some(ip => activeIps.has(ip))
 
         if (isConnected && isServerOnline) {
@@ -389,7 +390,7 @@ function Dashboard() {
 
     for (const user of users) {
       if (user.ip) {
-        const baseIP = user.ip.split(';')[0]
+        const baseIP = user.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean)[0]
         usedIPs.add(baseIP)
       }
       if (user.serverCode) {
@@ -716,12 +717,10 @@ function Dashboard() {
     setAvailableUsers(users)
   }
 
-  function convertToLocalTime(input, gmtOffset = 'GMT-6') {
-    const inputWithOffset = `${input} ${gmtOffset}`
-    const date = new Date(inputWithOffset)
-    const timeString = date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
-    const dateString = date.toLocaleDateString('en-US', { month: 'long', day: '2-digit', year: 'numeric' })
-    return `${timeString}, ${dateString}`
+  function convertToLocalTime(input) {
+    const chicagoTime = DateTime.fromFormat(input, 'yyyy-MM-dd HH:mm:ss', { zone: 'America/Chicago' })
+    const localTime = chicagoTime.toLocal()
+    return localTime.toFormat('h:mm a, MMMM d, yyyy')
   }
 
   if (!userData || !serverData) {
@@ -983,13 +982,17 @@ function Dashboard() {
                                   key={b.id}
                                   className="booking-calendar-slot"
                                   style={getSlotStyle(b)}
+                                  onClick={() => setSelectedBookingDetails(b)}
+                                  role="button"
+                                  tabIndex={0}
+                                  onKeyDown={(e) => e.key === 'Enter' && setSelectedBookingDetails(b)}
                                 >
                                   {b.userId === userData?.uid && (
                                     <div className="booking-calendar-slot-actions">
                                       <button
                                         type="button"
                                         className="icon-btn booking-calendar-cancel"
-                                        onClick={() => cancelBooking(b.id)}
+                                        onClick={(e) => { e.stopPropagation(); cancelBooking(b.id) }}
                                         title="Cancel booking"
                                       >
                                         <X size={12} />
@@ -997,7 +1000,7 @@ function Dashboard() {
                                     </div>
                                   )}
                                   <span className="booking-calendar-slot-time" title={b.timezone}>
-                                    {b.startTime} – {b.endTime}
+                                    {DateTime.fromFormat(b.startTime || '00:00', 'HH:mm').toFormat('h:mm a')} – {DateTime.fromFormat(b.endTime || '00:00', 'HH:mm').toFormat('h:mm a')}
                                   </span>
                                   <span className="booking-calendar-slot-user">{b.userName || 'Unknown'}</span>
                                   {b.purpose && <span className="booking-calendar-slot-purpose">{b.purpose}</span>}
@@ -1117,6 +1120,55 @@ function Dashboard() {
               </button>
             </ModalFooter>
           </form>
+        </Modal>
+
+        <Modal isOpen={!!selectedBookingDetails} onClose={() => setSelectedBookingDetails(null)} size="small">
+          <ModalHeader onClose={() => setSelectedBookingDetails(null)}>
+            <h3>Booking details</h3>
+          </ModalHeader>
+          <ModalBody>
+            {selectedBookingDetails && (
+              <div className="booking-details-modal">
+                <div className="booking-detail-row">
+                  <span className="booking-detail-label">Date</span>
+                  <span className="booking-detail-value">{DateTime.fromISO(selectedBookingDetails.date).toFormat('EEEE, MMMM d, yyyy')}</span>
+                </div>
+                <div className="booking-detail-row">
+                  <span className="booking-detail-label">Time</span>
+                  <span className="booking-detail-value">
+                    {DateTime.fromFormat(selectedBookingDetails.startTime || '00:00', 'HH:mm').toFormat('h:mm a')} – {DateTime.fromFormat(selectedBookingDetails.endTime || '00:00', 'HH:mm').toFormat('h:mm a')}
+                  </span>
+                </div>
+                <div className="booking-detail-row">
+                  <span className="booking-detail-label">User</span>
+                  <span className="booking-detail-value">{selectedBookingDetails.userName || 'Unknown'}</span>
+                </div>
+                {selectedBookingDetails.purpose && (
+                  <div className="booking-detail-row">
+                    <span className="booking-detail-label">Purpose</span>
+                    <span className="booking-detail-value">{selectedBookingDetails.purpose}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </ModalBody>
+          <ModalFooter>
+            {selectedBookingDetails?.userId === userData?.uid && (
+              <button
+                type="button"
+                className="modal-btn secondary"
+                onClick={() => {
+                  cancelBooking(selectedBookingDetails.id)
+                  setSelectedBookingDetails(null)
+                }}
+              >
+                Cancel booking
+              </button>
+            )}
+            <button type="button" className="modal-btn primary" onClick={() => setSelectedBookingDetails(null)}>
+              Close
+            </button>
+          </ModalFooter>
         </Modal>
         </>
         )}

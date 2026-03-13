@@ -108,7 +108,7 @@ function Usage() {
 
   function matchIpToUser(ip, accessData) {
     for (const [userId, info] of Object.entries(accessData)) {
-      const knownIps = info.ip ? info.ip.split(';') : []
+      const knownIps = info.ip ? info.ip.split(/[;,]/).map(s => s.trim()).filter(Boolean) : []
       if (knownIps.includes(ip)) {
         return {
           id: userId,
