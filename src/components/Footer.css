@@ -1,43 +1,62 @@
-/* Footer */
 .server-footer {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  border-top: 1px solid rgba(157, 157, 189, 0.2);
+  max-width: 1280px;
+  margin: 1.75rem auto 0;
+  padding: 0 1rem 1.25rem;
 }
 
-.footer-line {
-  height: 1px;
-  margin-bottom: 1.5rem;
+.footer-shell {
+  border-top: 1px solid rgba(39, 53, 73, 0.7);
+  border-radius: 0;
+  background: transparent;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0.1rem 0;
 }
 
 .server-footer p {
-  font-family: 'Courier New', monospace;
-  color: rgba(157, 157, 189, 0.6);
-  font-size: 0.9rem;
-  margin: 0;
+  color: var(--gh-fg-muted);
+  font-size: 0.82rem;
+}
+
+.footer-brand-block {
+  display: grid;
+  gap: 0.18rem;
+}
+
+.footer-brand {
+  color: var(--gh-fg);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.footer-note {
+  color: var(--gh-fg-muted);
+  font-size: 0.8rem;
+}
+
+.footer-meta {
+  white-space: nowrap;
+  font-size: 0.8rem;
 }
 
 .footer-prompt {
-  color: #10b981;
+  color: var(--gh-accent);
+  font-weight: 600;
 }
 
-/* Responsive Design */
-@media screen and (max-width: 768px) {
-  .server-footer {
-    margin: 2rem auto 1rem;
-    padding: 1.5rem 1rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .server-footer {
-    margin: 1.5rem auto 1rem;
-    padding: 1rem 0.75rem;
+@media (max-width: 900px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .server-footer p {
-    font-size: 0.85rem;
+  .footer-meta {
+    white-space: normal;
   }
 }

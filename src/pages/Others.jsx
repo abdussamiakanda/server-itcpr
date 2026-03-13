@@ -72,22 +72,14 @@ function Others() {
     return (
       <div className="page-container">
         <Navbar />
-        <main className="others-main">
-          <div className="server-card">
-            <div className="card-header">
-              <div className="terminal-window-controls">
-                <span className="control-dot red"></span>
-                <span className="control-dot yellow"></span>
-                <span className="control-dot green"></span>
-              </div>
-              <div className="card-title">
-                <span className="code-symbol">$</span> LOADING...
+        <main className="dashboard-main">
+          <section className="dashboard-section">
+            <div className="server-card">
+              <div className="card-content">
+                <p className="terminal-text">Initializing server connection…</p>
               </div>
             </div>
-            <div className="card-content">
-              <p className="terminal-text">Initializing server connection...</p>
-            </div>
-          </div>
+          </section>
         </main>
       </div>
     )
@@ -103,19 +95,21 @@ function Others() {
   return (
     <div className="page-container">
       <Navbar />
-      <main className="others-main">
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
+      <main className="dashboard-main">
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Infrastructure</span>
+              <h2>Beta server</h2>
+              <p>Operational status and resource metrics for the external compute environment.</p>
             </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> BETA_SERVER_INFO
+            <div className={`server-status-badge ${isServerOnlineBeta ? 'online' : 'offline'}`}>
+              <div className="status-dot"></div>
+              {isServerOnlineBeta ? 'ONLINE' : 'OFFLINE'}
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
             <div className="server-stats-grid">
             {!isServerOnlineBeta ? (
               <div className="server-offline-message">
@@ -154,20 +148,19 @@ function Others() {
             )}
             </div>
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> ACCESS_INFORMATION
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Access</span>
+              <h2>Access information</h2>
+              <p>Credentials for managed external servers available to your lab.</p>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
             <p className="terminal-text">
               These are external servers that are maintained by ITCPR for technical support
               and administration. Access is granted exclusively to authorized direct students,
@@ -199,7 +192,8 @@ function Others() {
               </div>
             )}
           </div>
-        </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
@@ -207,4 +201,3 @@ function Others() {
 }
 
 export default Others
-

@@ -100,14 +100,7 @@ function Changelog() {
       <main className="changelog-main">
         <div className="server-card">
           <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> WINDOWS_SOFTWARES
-            </div>
+            <div className="card-title">Windows softwares</div>
             <input
               type="text"
               placeholder="Search..."
@@ -139,14 +132,7 @@ function Changelog() {
 
         <div className="server-card">
           <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> WSL_PACKAGES
-            </div>
+            <div className="card-title">WSL packages</div>
             <input
               type="text"
               placeholder="Search..."

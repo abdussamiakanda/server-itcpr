@@ -4,11 +4,12 @@ import { useAuth } from '../contexts/AuthContext'
 import { collection, getDocs, query, where } from 'firebase/firestore'
 import { db } from '../config/firebase'
 import { API_BASE_URL } from '../config/api'
+import toast from 'react-hot-toast'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import './Statistics.css'
+import './Usage.css'
 
-function Statistics() {
+function Usage() {
   const { user: userData } = useAuth()
   const [stats, setStats] = useState({})
   const [rows, setRows] = useState([])
@@ -18,7 +19,7 @@ function Statistics() {
 
   useEffect(() => {
     if (userData) {
-      loadStatistics()
+      loadUsage()
     }
   }, [userData])
 
@@ -28,7 +29,7 @@ function Statistics() {
     }
   }, [timeRange, rows])
 
-  async function loadStatistics() {
+  async function loadUsage() {
     try {
       const sessionLog = await downloadJson('connection_sessions.json')
       const accessData = await downloadJson('access_codes.json')
@@ -41,7 +42,7 @@ function Statistics() {
       setUsers(firestoreUsers)
       setUsageByDay(generatedUsageByDay)
     } catch (error) {
-      console.error('Error loading statistics:', error)
+      console.error('Error loading usage:', error)
     }
   }
 
@@ -162,20 +163,18 @@ function Statistics() {
   return (
     <div className="page-container">
       <Navbar />
-      <main className="statistics-main">
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> USAGE_SUMMARY
+      <main className="dashboard-main">
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Overview</span>
+              <h2>Usage summary</h2>
+              <p>Session counts, connected time, and storage per user.</p>
             </div>
           </div>
-          <div className="card-content">
-          <div className="statistics-summary">
+          <div className="server-card">
+            <div className="card-content">
+          <div className="usage-summary">
             {usersList.map((user, idx) => {
               const data = stats[user]
               const totalMinutes = Math.floor(data.total_minutes)
@@ -196,20 +195,19 @@ function Statistics() {
             })}
           </div>
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> SESSIONS_PER_USER
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Sessions</span>
+              <h2>Sessions per user</h2>
+              <p>Connection count by user.</p>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           {usersList.map((user, i) => (
             <div key={i} className="bar-row">
               <div className="bar-label">{user}</div>
@@ -220,20 +218,19 @@ function Statistics() {
             </div>
           ))}
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> CONNECTED_TIME
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Time</span>
+              <h2>Connected time</h2>
+              <p>Total hours connected per user.</p>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           {usersList.map((user, i) => (
             <div key={i} className="bar-row">
               <div className="bar-label">{user}</div>
@@ -244,20 +241,19 @@ function Statistics() {
             </div>
           ))}
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> STORAGE_USED
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Storage</span>
+              <h2>Storage used</h2>
+              <p>Disk usage per user in GB.</p>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           {usersList.map((user, i) => (
             <div key={i} className="bar-row">
               <div className="bar-label">{user}</div>
@@ -268,17 +264,15 @@ function Statistics() {
             </div>
           ))}
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> SESSION_TIMELINE
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Timeline</span>
+              <h2>Session timeline</h2>
+              <p>Connection sessions over time by user.</p>
             </div>
             <div className="timeline-filters">
               <select value={timeRange} onChange={(e) => setTimeRange(e.target.value)} className="form-control">
@@ -289,7 +283,8 @@ function Statistics() {
               </select>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           <div className="timeline-wrapper">
             {(() => {
               const uniqueUsers = [...new Set(filteredRows.map(r => r.user))]
@@ -322,20 +317,19 @@ function Statistics() {
             })()}
           </div>
           </div>
-        </div>
+          </div>
+        </section>
 
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> MOST_ACTIVE_DAYS
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Activity</span>
+              <h2>Most active days</h2>
+              <p>Session count by weekday.</p>
             </div>
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           {orderedDays.map(day => {
             const count = usageByDay[day] || 0
             return (
@@ -349,12 +343,12 @@ function Statistics() {
             )
           })}
           </div>
-        </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
   )
 }
 
-export default Statistics
-
+export default Usage

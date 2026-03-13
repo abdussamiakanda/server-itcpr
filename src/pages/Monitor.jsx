@@ -133,16 +133,13 @@ function Monitor() {
   return (
     <div className="page-container">
       <Navbar />
-      <main className="monitor-main">
-        <div className="server-card">
-          <div className="card-header">
-            <div className="terminal-window-controls">
-              <span className="control-dot red"></span>
-              <span className="control-dot yellow"></span>
-              <span className="control-dot green"></span>
-            </div>
-            <div className="card-title">
-              <span className="code-symbol">$</span> WSL_COMMANDS_LOG
+      <main className="dashboard-main">
+        <section className="dashboard-section">
+          <div className="dashboard-section-heading">
+            <div className="dashboard-section-heading-copy">
+              <span className="dashboard-section-eyebrow">Activity</span>
+              <h2>WSL commands log</h2>
+              <p>Track WSL command activity with filtering by user, command ID, date, and full-text search.</p>
             </div>
             <input
               type="text"
@@ -150,11 +147,11 @@ function Monitor() {
               placeholder="Search..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-              style={{ marginLeft: 'auto', maxWidth: '200px' }}
+              className="search-input monitor-search"
             />
           </div>
-          <div className="card-content">
+          <div className="server-card">
+            <div className="card-content">
           <div className="wsl-filters">
             {userData.type === 'admin' && (
               <div className="filter-group">
@@ -224,7 +221,8 @@ function Monitor() {
             )}
           </div>
           </div>
-        </div>
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
@@ -232,4 +230,3 @@ function Monitor() {
 }
 
 export default Monitor
-

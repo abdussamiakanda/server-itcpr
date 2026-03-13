@@ -5,7 +5,7 @@ import { AuthProvider, useAuth } from './contexts/AuthContext'
 import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import Monitor from './pages/Monitor'
-import Statistics from './pages/Statistics'
+import Usage from './pages/Usage'
 import Others from './pages/Others'
 import ProtectedRoute from './components/ProtectedRoute'
 
@@ -40,10 +40,10 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/statistics"
+        path="/usage"
         element={
           <ProtectedRoute>
-            <Statistics />
+            <Usage />
           </ProtectedRoute>
         }
       />

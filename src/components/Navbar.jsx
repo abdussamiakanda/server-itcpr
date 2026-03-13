@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
-import { LogIn, Menu, X, Loader2 } from 'lucide-react'
+import { LogIn, Menu, X, Loader2, Server } from 'lucide-react'
 import './Navbar.css'
 
 function Navbar() {
@@ -38,7 +38,7 @@ function Navbar() {
 
   const navItems = [
     { path: '/dashboard', icon: 'home', label: 'Dashboard' },
-    { path: '/statistics', icon: 'bar_chart', label: 'Statistics' },
+    { path: '/usage', icon: 'bar_chart', label: 'Usage' },
     { path: '/monitor', icon: 'track_changes', label: 'Monitor' },
     // { path: '/changelog', icon: 'history', label: 'Changelog' }, // disabled for now
     { path: '/others', icon: 'expand_circle_down', label: 'Others' }
@@ -68,13 +68,21 @@ function Navbar() {
         />
       )}
       <header className="navbar-header">
-        <div className="navbar-content">
+        <div className="navbar-content navbar-shell">
           <div className="navbar-logo">
-            <div className="status-indicator active"></div>
-            <h1 onClick={() => navigate('/')} className="navbar-title">
-              <span className="terminal-prompt">$</span>
-              <span className="server-name">ITCPR_SERVER</span>
-            </h1>
+            <div
+              className="navbar-brand"
+              onClick={() => navigate('/')}
+              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && navigate('/')}
+              role="button"
+              tabIndex={0}
+            >
+              <Server className="navbar-brand-mark" size={18} aria-hidden="true" />
+              <h1 className="navbar-title">
+                <span className="terminal-prompt">ITCPR</span>
+                <span className="server-name">Server</span>
+              </h1>
+            </div>
           </div>
           <nav ref={menuRef} className={`navbar-nav ${mobileMenuOpen && user ? 'mobile-open' : ''}`}>
                  {user ? (
@@ -137,4 +145,3 @@ function Navbar() {
 }
 
 export default Navbar
-
